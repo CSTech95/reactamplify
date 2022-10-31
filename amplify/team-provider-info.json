@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-carservice-staging-155413-authRole",
+      "UnauthRoleArn": "arn:aws:iam::461122982034:role/amplify-carservice-staging-155413-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::461122982034:role/amplify-carservice-staging-155413-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-carservice-staging-155413-deployment",
+      "UnauthRoleName": "amplify-carservice-staging-155413-unauthRole",
+      "StackName": "amplify-carservice-staging-155413",
+      "StackId": "arn:aws:cloudformation:us-east-1:461122982034:stack/amplify-carservice-staging-155413/1b75b130-53b4-11ed-b9f6-0aec52f79881",
+      "AmplifyAppId": "d30rjfvjr5uoa9"
+    },
+    "categories": {
+      "auth": {
+        "carservice": {}
+      }
+    }
+  }
+}
