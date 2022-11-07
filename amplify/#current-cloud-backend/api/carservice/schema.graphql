@@ -37,7 +37,7 @@ enum Months {
   DECEMBER
 }
 
-type User @model @auth(rules: [{allow: owner}]) {
+type User @model @auth(rules: [{allow: owner}, {allow: public}, {allow: private}]) {
   id: ID!
   username: String
   firstName: String!

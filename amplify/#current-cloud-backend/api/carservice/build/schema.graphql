@@ -42,7 +42,7 @@ enum Months {
   DECEMBER
 }
 
-type User @aws_iam @aws_cognito_user_pools {
+type User @aws_iam @aws_cognito_user_pools @aws_api_key {
   id: ID!
   username: String
   firstName: String!
@@ -258,9 +258,9 @@ type Query {
   getHelpMemo(id: ID!): HelpMemo @aws_api_key @aws_iam
   listHelpMemos(filter: ModelHelpMemoFilterInput, limit: Int, nextToken: String): ModelHelpMemoConnection @aws_api_key @aws_iam
   syncHelpMemos(filter: ModelHelpMemoFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHelpMemoConnection @aws_api_key @aws_iam
-  getUser(id: ID!): User @aws_iam @aws_cognito_user_pools
-  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection @aws_iam @aws_cognito_user_pools
-  syncUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelUserConnection @aws_iam @aws_cognito_user_pools
+  getUser(id: ID!): User @aws_api_key @aws_iam @aws_cognito_user_pools
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection @aws_api_key @aws_iam @aws_cognito_user_pools
+  syncUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelUserConnection @aws_api_key @aws_iam @aws_cognito_user_pools
   getVehicle(id: ID!): Vehicle @aws_api_key @aws_iam
   listVehicles(filter: ModelVehicleFilterInput, limit: Int, nextToken: String): ModelVehicleConnection @aws_api_key @aws_iam
   syncVehicles(filter: ModelVehicleFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelVehicleConnection @aws_api_key @aws_iam
@@ -303,9 +303,9 @@ type Mutation {
   createHelpMemo(input: CreateHelpMemoInput!, condition: ModelHelpMemoConditionInput): HelpMemo @aws_api_key @aws_iam
   updateHelpMemo(input: UpdateHelpMemoInput!, condition: ModelHelpMemoConditionInput): HelpMemo @aws_api_key @aws_iam
   deleteHelpMemo(input: DeleteHelpMemoInput!, condition: ModelHelpMemoConditionInput): HelpMemo @aws_api_key @aws_iam
-  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User @aws_iam @aws_cognito_user_pools
-  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User @aws_iam @aws_cognito_user_pools
-  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User @aws_iam @aws_cognito_user_pools
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User @aws_api_key @aws_iam @aws_cognito_user_pools
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User @aws_api_key @aws_iam @aws_cognito_user_pools
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User @aws_api_key @aws_iam @aws_cognito_user_pools
   createVehicle(input: CreateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_api_key @aws_iam
   updateVehicle(input: UpdateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_api_key @aws_iam
   deleteVehicle(input: DeleteVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_api_key @aws_iam
@@ -325,15 +325,15 @@ type Subscription {
   onCreateHelpMemo(filter: ModelSubscriptionHelpMemoFilterInput): HelpMemo @aws_subscribe(mutations: ["createHelpMemo"]) @aws_api_key @aws_iam
   onUpdateHelpMemo(filter: ModelSubscriptionHelpMemoFilterInput): HelpMemo @aws_subscribe(mutations: ["updateHelpMemo"]) @aws_api_key @aws_iam
   onDeleteHelpMemo(filter: ModelSubscriptionHelpMemoFilterInput): HelpMemo @aws_subscribe(mutations: ["deleteHelpMemo"]) @aws_api_key @aws_iam
-  onCreateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["createUser"]) @aws_iam @aws_cognito_user_pools
-  onUpdateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["updateUser"]) @aws_iam @aws_cognito_user_pools
-  onDeleteUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["deleteUser"]) @aws_iam @aws_cognito_user_pools
+  onCreateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["createUser"]) @aws_api_key @aws_iam @aws_cognito_user_pools
+  onUpdateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["updateUser"]) @aws_api_key @aws_iam @aws_cognito_user_pools
+  onDeleteUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["deleteUser"]) @aws_api_key @aws_iam @aws_cognito_user_pools
   onCreateVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["createVehicle"]) @aws_api_key @aws_iam
   onUpdateVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["updateVehicle"]) @aws_api_key @aws_iam
   onDeleteVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["deleteVehicle"]) @aws_api_key @aws_iam
 }
 
-type ModelUserConnection @aws_iam @aws_cognito_user_pools {
+type ModelUserConnection @aws_api_key @aws_iam @aws_cognito_user_pools {
   items: [User]!
   nextToken: String
   startedAt: AWSTimestamp

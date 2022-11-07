@@ -1,58 +1,60 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, Modal, Pressable, StyleSheet, Text, TextInput, View, Platform } from "react-native";
+//import { DataStore } from "@aws-amplify/datastore";
 import { DataStore } from "aws-amplify";
-import { Cars } from "./models";
+import { Vehicle } from "./models";
 import Header from "./Components/Header";
+import { Auth } from "aws-amplify";
 
-const AddTodoModal = ({ modalVisible, setModalVisible }) => {
-	const [make, setMake] = useState("");
-	const [model, setModel] = useState("");
+//const AddTodoModal = ({ modalVisible, setModalVisible }) => {
+//	const [make, setMake] = useState("");
+//	const [model, setModel] = useState("");
 
-	async function addVehicle() {
-		await DataStore.save(new Cars({ make, model, isComplete: false }));
-		setModalVisible(false);
-		setMake("");
-		setModel("");
-	}
+//	async function addVehicle() {
+//		await DataStore.save(new Cars({ make, model, isComplete: false }));
+//		setModalVisible(false);
+//		setMake("");
+//		setModel("");
+//	}
 
-	function closeModal() {
-		setModalVisible(false);
-	}
+//	function closeModal() {
+//		setModalVisible(false);
+//	}
 
-	return (
-		<Modal animationType="fade" onRequestClose={closeModal} transparent visible={modalVisible}>
-			<View style={styles.modalContainer}>
-				<View style={styles.modalInnerContainer}>
-					<Pressable onPress={closeModal} style={styles.modalDismissButton}>
-						<Text style={styles.modalDismissText}>X</Text>
-					</Pressable>
-					<TextInput onChangeText={setMake} placeholder="Make" style={styles.modalInput} />
-					<TextInput onChangeText={setModel} placeholder="Model" style={styles.modalInput} />
-					<Pressable onPress={addVehicle} style={styles.buttonContainer}>
-						<Text style={styles.buttonText}>Add Vehicle</Text>
-					</Pressable>
-				</View>
-			</View>
-		</Modal>
-	);
-};
+//	return (
+//		<Modal animationType="fade" onRequestClose={closeModal} transparent visible={modalVisible}>
+//			<View style={styles.modalContainer}>
+//				<View style={styles.modalInnerContainer}>
+//					<Pressable onPress={closeModal} style={styles.modalDismissButton}>
+//						<Text style={styles.modalDismissText}>X</Text>
+//					</Pressable>
+//					<TextInput onChangeText={setMake} placeholder="Make" style={styles.modalInput} />
+//					<TextInput onChangeText={setModel} placeholder="Model" style={styles.modalInput} />
+//					<Pressable onPress={addVehicle} style={styles.buttonContainer}>
+//						<Text style={styles.buttonText}>Add Vehicle</Text>
+//					</Pressable>
+//				</View>
+//			</View>
+//		</Modal>
+//	);
+//};
 
 const TodoList = () => {
 	const [cars, setCars] = useState([]);
 
-	useEffect(() => {
-		//query the initial todolist and subscribe to data updates
-		const subscription = DataStore.observeQuery(Cars).subscribe((snapshot) => {
-			//isSynced can be used to show a loading spinner when the list is being loaded.
-			const { items, isSynced } = snapshot;
-			setCars(items);
-		});
+	//useEffect(() => {
+	//	//query the initial todolist and subscribe to data updates
+	//	const subscription = DataStore.observeQuery(Cars).subscribe((snapshot) => {
+	//		//isSynced can be used to show a loading spinner when the list is being loaded.
+	//		const { items, isSynced } = snapshot;
+	//		setCars(items);
+	//	});
 
-		//unsubscribe to data updates when component is destroyed so that we don’t introduce a memory leak.
-		return function cleanup() {
-			subscription.unsubscribe();
-		};
-	}, []);
+	//	//unsubscribe to data updates when component is destroyed so that we don’t introduce a memory leak.
+	//	return function cleanup() {
+	//		subscription.unsubscribe();
+	//	};
+	//}, []);
 
 	async function deleteTodo(todo) {
 		try {
@@ -92,12 +94,49 @@ const TodoList = () => {
 	return <FlatList data={cars} keyExtractor={({ id }) => id} renderItem={renderItem} />;
 };
 
+const AddVehicle = () => {
+	const [make, setMake] = useState("");
+	const [model, setModel] = useState("");
+	//useEffect(() => {
+	async function addVehicle() {
+		await DataStore.save(
+			new Vehicle({
+				Make: "Lorem ipsum dolor sit amet",
+				Model: "Lorem ipsum dolor sit amet",
+				isAvailable: true,
+				year: 1020,
+				//vehicleType: VehicleTypes.SEDAN,
+				userID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
+				rentedBy: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
+			})
+		);
+		//setMake("");
+		//setModel("");
+		//addVehicle();
+	}
+	//});
+
+	return (
+		<>
+			<Pressable onPress={() => Auth.signOut()} style={styles.buttonContainer}>
+				<Text style={styles.buttonText}>Sign out</Text>
+			</Pressable>
+
+			<Pressable onPress={addVehicle} style={styles.buttonContainer}>
+				<Text style={styles.buttonText}>Add Vehicle</Text>
+			</Pressable>
+		</>
+	);
+};
+
 const Home = () => {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	return (
 		<>
-			<Header />
+			<Text>Home Screen</Text>
+			<AddVehicle />
+			{/*<Header />
 			<TodoList />
 			<Pressable
 				onPress={() => {
@@ -107,7 +146,7 @@ const Home = () => {
 			>
 				<Text style={styles.buttonText}>+ Add Vehicle</Text>
 			</Pressable>
-			<AddTodoModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+			<AddTodoModal modalVisible={modalVisible} setModalVisible={setModalVisible} />*/}
 		</>
 	);
 };
