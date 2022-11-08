@@ -106,8 +106,8 @@ const AddVehicle = () => {
 				isAvailable: true,
 				year: 1020,
 				//vehicleType: VehicleTypes.SEDAN,
-				userID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
-				rentedBy: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
+				userID: "0cd84528-c3ca-41f1-afb9-c886058b5b15",
+				//rentedBy: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
 			})
 		);
 		//setMake("");

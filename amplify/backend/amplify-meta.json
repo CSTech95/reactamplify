@@ -50,7 +50,7 @@
         "GraphQLAPIEndpointOutput": "https://ehh5bnnmwjcldjtiytmt67pwia.appsync-api.us-east-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-ohuj5fphcngn5msdpcxeh7jwc4"
       },
-      "lastPushTimeStamp": "2022-11-07T11:28:19.595Z",
+      "lastPushTimeStamp": "2022-11-08T12:27:56.686Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apicarservice"
@@ -96,11 +96,37 @@
         "IdentityPoolName": "testAuthIdentityPool__staging",
         "UserPoolName": "carservice"
       },
-      "lastPushTimeStamp": "2022-11-07T11:28:19.597Z",
+      "lastPushTimeStamp": "2022-11-08T12:28:42.645Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/auth/carservice-cloudformation-template.json",
         "logicalId": "authcarservice"
-      }
+      },
+      "lastPushDirHash": "qmQlk6BzwPEr2qJUqJ5mFx2BokE="
+    },
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "carservice",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ]
+        }
+      ],
+      "lastPushTimeStamp": "2022-11-08T12:28:42.646Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/auth/userPoolGroups-cloudformation-template.json",
+        "logicalId": "authuserPoolGroups"
+      },
+      "output": {
+        "carusersGroupRole": "arn:aws:iam::461122982034:role/us-east-1_akzBrz70y-carusersGroupRole"
+      },
+      "lastPushDirHash": "XED87oLPDrCm4Hq1BDgcV8ngIq4="
     }
   }
 }

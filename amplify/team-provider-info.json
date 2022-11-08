@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "carservice": {}
+        "carservice": {},
+        "userPoolGroups": {}
       },
       "api": {
         "carservice": {}

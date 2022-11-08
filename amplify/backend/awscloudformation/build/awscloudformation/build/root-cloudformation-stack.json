@@ -212,7 +212,7 @@
           "usernameAttributes": "email",
           "useDefault": "manual",
           "userPoolGroups": false,
-          "userPoolGroupList": "",
+          "userPoolGroupList": "carusers",
           "adminQueries": false,
           "thirdPartyAuth": false,
           "authProviders": "",
@@ -232,6 +232,51 @@
           },
           "breakCircularDependency": true,
           "dependsOn": "",
+          "env": "staging"
+        }
+      }
+    },
+    "authuserPoolGroups": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/auth/userPoolGroups-cloudformation-template.json",
+        "Parameters": {
+          "AuthRoleArn": {
+            "Fn::GetAtt": [
+              "AuthRole",
+              "Arn"
+            ]
+          },
+          "UnauthRoleArn": {
+            "Fn::GetAtt": [
+              "UnauthRole",
+              "Arn"
+            ]
+          },
+          "authcarserviceUserPoolId": {
+            "Fn::GetAtt": [
+              "authcarservice",
+              "Outputs.UserPoolId"
+            ]
+          },
+          "authcarserviceAppClientIDWeb": {
+            "Fn::GetAtt": [
+              "authcarservice",
+              "Outputs.AppClientIDWeb"
+            ]
+          },
+          "authcarserviceAppClientID": {
+            "Fn::GetAtt": [
+              "authcarservice",
+              "Outputs.AppClientID"
+            ]
+          },
+          "authcarserviceIdentityPoolId": {
+            "Fn::GetAtt": [
+              "authcarservice",
+              "Outputs.IdentityPoolId"
+            ]
+          },
           "env": "staging"
         }
       }

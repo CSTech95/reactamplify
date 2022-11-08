@@ -39,7 +39,9 @@
   ],
   "useDefault": "manual",
   "userPoolGroups": false,
-  "userPoolGroupList": [],
+  "userPoolGroupList": [
+    "carusers"
+  ],
   "adminQueries": false,
   "thirdPartyAuth": false,
   "authProviders": [],
