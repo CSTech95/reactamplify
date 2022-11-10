@@ -15,9 +15,6 @@
       "auth": {
         "carservice": {},
         "userPoolGroups": {}
-      },
-      "api": {
-        "carservice": {}
       }
     }
   }
