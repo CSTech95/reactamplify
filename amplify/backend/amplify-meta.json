@@ -50,7 +50,7 @@
         "GraphQLAPIEndpointOutput": "https://ehh5bnnmwjcldjtiytmt67pwia.appsync-api.us-east-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-ohuj5fphcngn5msdpcxeh7jwc4"
       },
-      "lastPushTimeStamp": "2022-11-10T18:05:29.100Z",
+      "lastPushTimeStamp": "2022-11-10T18:17:17.149Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apicarservice"
@@ -96,7 +96,7 @@
         "IdentityPoolName": "testAuthIdentityPool__staging",
         "UserPoolName": "carservice"
       },
-      "lastPushTimeStamp": "2022-11-10T18:05:29.101Z",
+      "lastPushTimeStamp": "2022-11-10T18:17:17.150Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/auth/carservice-cloudformation-template.json",
         "logicalId": "authcarservice"
@@ -118,7 +118,7 @@
           ]
         }
       ],
-      "lastPushTimeStamp": "2022-11-10T18:05:31.401Z",
+      "lastPushTimeStamp": "2022-11-10T18:17:19.341Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/auth/userPoolGroups-cloudformation-template.json",
         "logicalId": "authuserPoolGroups"

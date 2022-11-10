@@ -136,7 +136,7 @@ const Home = () => {
 
 	return (
 		<>
-			<Text>Home Screen</Text>
+			<Text>Home Screen Home Home</Text>
 			<AddVehicle />
 			{/*<Header />
 			<TodoList />
