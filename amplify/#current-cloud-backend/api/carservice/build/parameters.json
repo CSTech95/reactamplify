@@ -1,0 +1,19 @@
+{
+    "AppSyncApiName": "carservice",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authcarservice",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "S3DeploymentBucket": "amplify-carservice-staging-155413-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/49a03c799fa83bc3a6fe608b40820b3fd6931f08"
+}
