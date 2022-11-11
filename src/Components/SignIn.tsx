@@ -23,7 +23,6 @@ export default class SignIn extends React.Component {
     }
 };
 //Aser's work
-//eoijfoejwofjeojfowejfojefojwofjewjfw
 
 const styles = StyleSheet.create({
     container: {
