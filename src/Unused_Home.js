@@ -3,7 +3,7 @@ import { FlatList, Modal, Pressable, StyleSheet, Text, TextInput, View, Platform
 //import { DataStore } from "@aws-amplify/datastore";
 import { DataStore } from "aws-amplify";
 import { Vehicle } from "./models";
-import Header from "./Components/Header";
+import Header from "./components/Header";
 import { Auth } from "aws-amplify";
 
 //Helloaaa

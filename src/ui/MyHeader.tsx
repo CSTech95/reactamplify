@@ -8,6 +8,16 @@ export default class MyHeader extends React.Component {
     render() {
         return (
             <View style={styles.header_box}>
+                {this.props.menu &&
+                    <TouchableOpacity
+                        style={styles.icon_box}
+                        onPress={() => this.props.navigation.navigate('Home')}
+                    >
+                        <Image
+                            style={styles.left}
+                            source={require('../../assets/img/menu.png')} />
+                    </TouchableOpacity>
+                }
                 {this.props.back &&
                     <TouchableOpacity
                         style={styles.icon_box}
@@ -18,34 +28,22 @@ export default class MyHeader extends React.Component {
                             source={require('../../assets/img/back.png')} />
                     </TouchableOpacity>
                 }
+                
                 <View style={styles.title_box}>
                     <Text style={styles.title}>
-                        {this.props.title}
+                        Car Renting
                     </Text>
                 </View>
-                {this.props.setting &&
+                
+                {this.props.my_page &&
                     <TouchableOpacity
                         style={styles.icon_box}
-                        onPress={() => this.props.navigation.navigate('Settings')}
+                        onPress={() =>
+                            this.props.navigation.navigate('SignUp')}
                     >
                         <Image
-                            style={styles.left}
-                            source={require('../../assets/img/menu.png')} />
-                    </TouchableOpacity>
-                }
-                {this.props.menu &&
-                    <TouchableOpacity
-                        style={styles.icon_box}
-                        onPress={() => this.props.navigation.navigate('DeviceInfo', {
-                            color: this.props.color,
-                            add: false,
-                            device_code: this.props.deviceCode,
-                            email: this.props.email,
-                        })}
-                    >
-                        <Image
-                            style={styles.left}
-                            source={require('../../assets/img/menu.png')} />
+                            style={styles.right}
+                            source={require('../../assets/img/my_page.png')} />
                     </TouchableOpacity>
                 }
                 {

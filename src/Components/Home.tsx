@@ -1,6 +1,6 @@
 import React from "react"
 import { View, StyleSheet, Text } from 'react-native'
-import MyHeader from './MyHeader';
+import MyHeader from '../ui/MyHeader';
 
 export default class Home extends React.Component {
 
@@ -9,7 +9,8 @@ export default class Home extends React.Component {
 
             <View style={styles.container}>
                 <MyHeader
-                    title="Home"
+                    my_page="true"
+                    menu="true"
                     navigation={this.props.navigation} />
                 <Text>Home</Text>
             </View>
