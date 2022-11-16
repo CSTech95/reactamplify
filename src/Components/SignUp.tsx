@@ -55,6 +55,8 @@ export default class SignUp extends React.Component {
         this.checkPassword(this.state.psw1, psw)
     }
 
+    //test
+
     checkPassword = (psw1, psw2) => {
         var regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
         var isValid1 = regExp.test(psw1);
