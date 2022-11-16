@@ -48,11 +48,13 @@ const styles = StyleSheet.create({
     input_box: {
         flexDirection: 'row',
         height: 52,
-        marginTop: 10,
+        marginTop: 20,
         paddingStart: 12,
         paddingEnd: 8,
         justifyContent: 'center',
-        backgroundColor: '#F1F1F5',
+        backgroundColor: '#FFFFFF',
+        borderColor: '#06A500',
+        borderWidth: 1, 
     },
     input: {
         fontSize: 14,

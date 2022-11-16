@@ -2,15 +2,20 @@ import React from "react"
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import MyHeader from '../ui/MyHeader';
 import MainTextInput from '../ui/MainTextInput';
+import AdBlock from "../ui/AdBlock";
+import MyButton from "../ui/MyButton";
 
 export default class SignUp extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            name: "",
             email: "",
             psw1: "",
             psw2: "",
+            name_war: false,
+            name_war_msg: "You can only type letters. Type your full name.",
             email_war: false,
             psw1_war: false,
             psw1_war_msg: "",
@@ -18,8 +23,18 @@ export default class SignUp extends React.Component {
             email_war_msg: "",
             radio: false,
         }
+        this.onChangeName.bind(this);
         this.onChangeEmail.bind(this);
         this.signUpCall.bind(this);
+    }
+
+    onChangeName = (name) => {
+        var regExp = /^[a-zA-Z ,.'-]+$/i
+        var isValid = regExp.test(name);
+        this.setState({
+            name: name,
+            name_war: !isValid
+        })
     }
 
     onChangeEmail = (email) => {
@@ -88,7 +103,7 @@ export default class SignUp extends React.Component {
         var emaill = this.state.email;
         var psww = this.state.psw1;
 
-        firebaseService.signUpUser(emaill, psww, this.onSuccess, this.onError)
+
 
     }
 
@@ -103,6 +118,16 @@ export default class SignUp extends React.Component {
                 <View style={styles.contents}>
                     <View style={styles.half_box}>
                         <View style={styles.sign_box}>
+                            <Text style={styles.sub_title}>Create An Account</Text>
+
+                            <MainTextInput
+                                placeholder="Full Name"
+                                onChangeText={this.onChangeName}
+                                keyboardType="default"
+                                warning={this.state.name_war}
+                                maxLength={64}
+                                warning_msg={this.state.name_war_msg}
+                                value={this.state.name} />
 
                             <MainTextInput
                                 placeholder="Email Address"
@@ -125,14 +150,20 @@ export default class SignUp extends React.Component {
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('SignIn')}
                             >
-                                <Text>I already have an account</Text>
+                                <Text style={styles.signin}>I already have an account</Text>
                             </TouchableOpacity>
+                            <MyButton
+                                title="SIGN UP"
+                                color="#06A500"
+                                titleColor="#ffffff"
+                                onPress={this.onSignIn} />
                         </View>
-                        <Text>aa</Text>
                     </View>
 
                     <View style={styles.half_box}>
-                        <Text>Next box</Text>
+                        <View style={styles.sign_box}>
+                            <AdBlock />
+                        </View>
                     </View>
 
                 </View>
@@ -156,7 +187,8 @@ const styles = StyleSheet.create({
 
     },
     half_box: {
-        marginVertical: 12,
+        marginTop: 12,
+        marginBottom: 24,
         marginHorizontal: 12,
         minWidth: 350,
         maxWidth: 600,
@@ -169,6 +201,23 @@ const styles = StyleSheet.create({
         marginHorizontal: 'auto',
         justifyContent: 'center',
         flex: 1,
-        flexDirection:'column'
+        flexDirection: 'column'
+    },
+    sub_title: {
+        fontSize: 20,
+        color: '#191919',
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        marginVertical: 24,
+
+    },
+    signin: {
+        alignSelf: 'center',
+        fontSize: 12,
+        color: '#767676',
+        marginTop: 24,
+    },
+    text_btn: {
+
     }
 });
