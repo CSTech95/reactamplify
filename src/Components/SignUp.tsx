@@ -56,7 +56,7 @@ export default class SignUp extends React.Component {
     }
 
     checkPassword = (psw1, psw2) => {
-        var regExp = /^(?=.*?[A-Z])(?=.*\d)(?=.*?[a-z])[a-zA-Z\d]{8,16}$/
+        var regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
         var isValid1 = regExp.test(psw1);
         var isValid2 = psw1 == psw2
         var psw1_war_msg = ""
@@ -145,8 +145,19 @@ export default class SignUp extends React.Component {
                                 keyboardType="visible-password"
                                 secureTextEntry={true}
                                 warning={this.state.psw1_war}
-                                warning_msg="Password is not following the correct format"
+                                warning_msg="Use 8 to 16 characters. Have at least one lowercase letter, one uppercase letter, one number, and one special character"
                                 onChangeText={this.onChangePassword} />
+
+                            <MainTextInput
+                                placeholder="ConfirmPassword"
+                                value={this.state.psw2}
+                                maxLength={16}
+                                keyboardType="visible-password"
+                                secureTextEntry={true}
+                                warning={this.state.psw2_war}
+                                warning_msg="Password is not the same"
+                                onChangeText={this.onChangeConfirmPassword} />
+
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('SignIn')}
                             >
