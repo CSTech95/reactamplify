@@ -9,7 +9,6 @@ import { Auth } from "aws-amplify";
 const AddVehicle = () => {
 	const [make, setMake] = useState("");
 	const [model, setModel] = useState("");
-	//useEffect(() => {
 	async function addVehicle() {
 		await DataStore.save(
 			new Vehicle({
