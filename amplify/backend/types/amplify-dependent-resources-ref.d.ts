@@ -19,5 +19,11 @@ export type AmplifyDependentResourcesAttributes = {
         "userPoolGroups": {
             "carusersGroupRole": "string"
         }
+    },
+    "storage": {
+        "s3fileamplify": {
+            "BucketName": "string",
+            "Region": "string"
+        }
     }
 }

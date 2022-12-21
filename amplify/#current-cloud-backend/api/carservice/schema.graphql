@@ -1,3 +1,34 @@
+type Cards @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  cardNumber: Int
+  fName: String
+  lName: String
+  expMonth: Int
+  expYear: Int
+  secCode: Int
+  address: String
+  zip: Int
+  city: String
+  country: String
+  state: String
+  userID: ID! @index(name: "byUser")
+}
+
+type Payments @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  createdAt: AWSDate
+  rentalPayment: Rentals @hasOne
+  userID: ID! @index(name: "byUser")
+}
+
+type Rentals @model @auth(rules: [{allow: public}, {allow: owner}]) {
+  id: ID!
+  Vehicle: Vehicle @hasOne
+  startTime: AWSDate
+  endTime: AWSDate
+  userID: ID! @index(name: "byUser")
+}
+
 enum VehicleTypes {
   SEDAN
   COUPE
@@ -5,8 +36,6 @@ enum VehicleTypes {
   TRUCK
   MOTORCYCLE
   VAN
-  BOAT
-  PLANE
 }
 
 enum HelpTypes {
@@ -14,10 +43,10 @@ enum HelpTypes {
   BILLING
 }
 
-type HelpMemo @model @auth(rules: [{allow: public}]) {
+type HelpMemo @model @auth(rules: [{allow: owner}]) {
   id: ID!
-  type: HelpTypes!
-  description: String!
+  type: String
+  description: String
   createdAt: AWSDateTime
   userID: ID! @index(name: "byUser")
 }
@@ -37,32 +66,34 @@ enum Months {
   DECEMBER
 }
 
-type User @model @auth(rules: [{allow: owner}, {allow: public}, {allow: private}]) {
+type User @model @auth(rules: [{allow: owner}]) {
   id: ID!
   username: String
-  firstName: String!
-  lastName: String!
-  birthMonth: Months
+  firstName: String
+  lastName: String
+  birthMonth: String
   birthDay: String
   birthYear: String
   phoneNumber: String
-  houseNumber: Int!
-  houseStreet: String!
-  town: String!
-  state: String!
-  HelpMemos: [HelpMemo] @hasMany(indexName: "byUser", fields: ["id"])
-  rentedVehicles: [Vehicle] @hasMany(indexName: "byUser", fields: ["id"])
-  country: String!
+  houseNumber: Int
+  houseStreet: String
+  zip: String
+  state: String
+  userMemo: [Payments] @hasMany(indexName: "byUser", fields: ["id"])
+  town: String
+  userRentals: [Payments] @hasMany(indexName: "byUser", fields: ["id"])
+  userPayments: [Payments] @hasMany(indexName: "byUser", fields: ["id"])
+  userCards: [Payments] @hasMany(indexName: "byUser", fields: ["id"])
+  country: String
 }
 
-type Vehicle @model @auth(rules: [{allow: public}]) {
+type Vehicle @model @auth(rules: [{allow: owner}]) {
   id: ID!
-  Make: String!
-  Model: String!
-  isAvailable: Boolean!
-  year: Int!
-  vehicleType: VehicleTypes
-  userID: ID! @index(name: "byUser")
-  rentedBy: User @belongsTo
+  make: String
+  model: String
+  isAvailable: Boolean
+  year: Int
+  vehicleType: String
+  img: String
 }
  

@@ -18,6 +18,9 @@
       },
       "api": {
         "carservice": {}
+      },
+      "storage": {
+        "s3fileamplify": {}
       }
     }
   }

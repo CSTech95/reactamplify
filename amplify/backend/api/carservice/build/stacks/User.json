@@ -43,16 +43,16 @@
     "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
       "Type": "String"
     },
-    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
-      "Type": "String"
-    },
     "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
       "Type": "String"
     },
     "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
       "Type": "String"
     },
-    "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoQuerygetHelpMemopostAuth0FunctionQuerygetHelpMemopostAuth0FunctionAppSyncFunction8EF017D7FunctionId": {
+    "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardsauth0FunctionQuerygetCardsauth0FunctionAppSyncFunction1D40C548FunctionId": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardspostAuth0FunctionQuerygetCardspostAuth0FunctionAppSyncFunction6C61730DFunctionId": {
       "Type": "String"
     },
     "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
@@ -61,13 +61,22 @@
     "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
       "Type": "String"
     },
-    "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoMutationcreateHelpMemoinit0FunctionMutationcreateHelpMemoinit0FunctionAppSyncFunction7753A5DFFunctionId": {
+    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
       "Type": "String"
     },
-    "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoMutationupdateHelpMemoinit0FunctionMutationupdateHelpMemoinit0FunctionAppSyncFunction1F8E1E8DFunctionId": {
+    "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsMutationcreateCardsinit0FunctionMutationcreateCardsinit0FunctionAppSyncFunction7EF0C169FunctionId": {
       "Type": "String"
     },
-    "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoSubscriptionOnCreateHelpMemoDataResolverFnSubscriptionOnCreateHelpMemoDataResolverFnAppSyncFunctionB5709B5FFunctionId": {
+    "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsMutationupdateCardsinit0FunctionMutationupdateCardsinit0FunctionAppSyncFunctionD20E8301FunctionId": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsSubscriptiononCreateCardsauth0FunctionSubscriptiononCreateCardsauth0FunctionAppSyncFunction8E85A22AFunctionId": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsSubscriptionOnCreateCardsDataResolverFnSubscriptionOnCreateCardsDataResolverFnAppSyncFunction390A4D13FunctionId": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsCardsOwnerDataResolverFnCardsOwnerDataResolverFnAppSyncFunctionDFD6E2C5FunctionId": {
       "Type": "String"
     }
   },
@@ -245,7 +254,8 @@
                 "dynamodb:BatchWriteItem",
                 "dynamodb:PutItem",
                 "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem"
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable"
               ],
               "Effect": "Allow",
               "Resource": [
@@ -437,36 +447,6 @@
         "UserIAMRole93CEE926"
       ]
     },
-    "QuerygetUserauth0FunctionQuerygetUserauth0FunctionAppSyncFunction9E6250B0": {
-      "Type": "AWS::AppSync::FunctionConfiguration",
-      "Properties": {
-        "ApiId": {
-          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
-        },
-        "DataSourceName": {
-          "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
-        },
-        "FunctionVersion": "2018-05-29",
-        "Name": "QuerygetUserauth0Function",
-        "RequestMappingTemplateS3Location": {
-          "Fn::Join": [
-            "",
-            [
-              "s3://",
-              {
-                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
-              },
-              "/",
-              {
-                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
-              },
-              "/resolvers/Query.getUser.auth.1.req.vtl"
-            ]
-          ]
-        },
-        "ResponseMappingTemplate": "$util.toJson({})"
-      }
-    },
     "QueryGetUserDataResolverFnQueryGetUserDataResolverFnAppSyncFunction36A3E4CF": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
@@ -534,13 +514,10 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Fn::GetAtt": [
-                "QuerygetUserauth0FunctionQuerygetUserauth0FunctionAppSyncFunction9E6250B0",
-                "FunctionId"
-              ]
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardsauth0FunctionQuerygetCardsauth0FunctionAppSyncFunction1D40C548FunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoQuerygetHelpMemopostAuth0FunctionQuerygetHelpMemopostAuth0FunctionAppSyncFunction8EF017D7FunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardspostAuth0FunctionQuerygetCardspostAuth0FunctionAppSyncFunction6C61730DFunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -652,13 +629,10 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Fn::GetAtt": [
-                "QuerygetUserauth0FunctionQuerygetUserauth0FunctionAppSyncFunction9E6250B0",
-                "FunctionId"
-              ]
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardsauth0FunctionQuerygetCardsauth0FunctionAppSyncFunction1D40C548FunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoQuerygetHelpMemopostAuth0FunctionQuerygetHelpMemopostAuth0FunctionAppSyncFunction8EF017D7FunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardspostAuth0FunctionQuerygetCardspostAuth0FunctionAppSyncFunction6C61730DFunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -770,13 +744,10 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Fn::GetAtt": [
-                "QuerygetUserauth0FunctionQuerygetUserauth0FunctionAppSyncFunction9E6250B0",
-                "FunctionId"
-              ]
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardsauth0FunctionQuerygetCardsauth0FunctionAppSyncFunction1D40C548FunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoQuerygetHelpMemopostAuth0FunctionQuerygetHelpMemopostAuth0FunctionAppSyncFunction8EF017D7FunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardspostAuth0FunctionQuerygetCardspostAuth0FunctionAppSyncFunction6C61730DFunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -918,7 +889,7 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoMutationcreateHelpMemoinit0FunctionMutationcreateHelpMemoinit0FunctionAppSyncFunction7753A5DFFunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsMutationcreateCardsinit0FunctionMutationcreateCardsinit0FunctionAppSyncFunction7EF0C169FunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -927,7 +898,7 @@
               ]
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoQuerygetHelpMemopostAuth0FunctionQuerygetHelpMemopostAuth0FunctionAppSyncFunction8EF017D7FunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardspostAuth0FunctionQuerygetCardspostAuth0FunctionAppSyncFunction6C61730DFunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -1090,7 +1061,7 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoMutationupdateHelpMemoinit0FunctionMutationupdateHelpMemoinit0FunctionAppSyncFunction1F8E1E8DFunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsMutationupdateCardsinit0FunctionMutationupdateCardsinit0FunctionAppSyncFunctionD20E8301FunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -1099,7 +1070,7 @@
               ]
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoQuerygetHelpMemopostAuth0FunctionQuerygetHelpMemopostAuth0FunctionAppSyncFunction8EF017D7FunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardspostAuth0FunctionQuerygetCardspostAuth0FunctionAppSyncFunction6C61730DFunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -1268,7 +1239,7 @@
               ]
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoQuerygetHelpMemopostAuth0FunctionQuerygetHelpMemopostAuth0FunctionAppSyncFunction8EF017D7FunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardspostAuth0FunctionQuerygetCardspostAuth0FunctionAppSyncFunction6C61730DFunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -1313,36 +1284,6 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "SubscriptiononCreateUserauth0FunctionSubscriptiononCreateUserauth0FunctionAppSyncFunctionE9B4721A": {
-      "Type": "AWS::AppSync::FunctionConfiguration",
-      "Properties": {
-        "ApiId": {
-          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
-        },
-        "DataSourceName": {
-          "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
-        },
-        "FunctionVersion": "2018-05-29",
-        "Name": "SubscriptiononCreateUserauth0Function",
-        "RequestMappingTemplateS3Location": {
-          "Fn::Join": [
-            "",
-            [
-              "s3://",
-              {
-                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
-              },
-              "/",
-              {
-                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
-              },
-              "/resolvers/Subscription.onCreateUser.auth.1.req.vtl"
-            ]
-          ]
-        },
-        "ResponseMappingTemplate": "$util.toJson({})"
-      }
-    },
     "SubscriptiononCreateUserResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
@@ -1355,16 +1296,13 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Fn::GetAtt": [
-                "SubscriptiononCreateUserauth0FunctionSubscriptiononCreateUserauth0FunctionAppSyncFunctionE9B4721A",
-                "FunctionId"
-              ]
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsSubscriptiononCreateCardsauth0FunctionSubscriptiononCreateCardsauth0FunctionAppSyncFunction8E85A22AFunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoQuerygetHelpMemopostAuth0FunctionQuerygetHelpMemopostAuth0FunctionAppSyncFunction8EF017D7FunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardspostAuth0FunctionQuerygetCardspostAuth0FunctionAppSyncFunction6C61730DFunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoSubscriptionOnCreateHelpMemoDataResolverFnSubscriptionOnCreateHelpMemoDataResolverFnAppSyncFunctionB5709B5FFunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsSubscriptionOnCreateCardsDataResolverFnSubscriptionOnCreateCardsDataResolverFnAppSyncFunction390A4D13FunctionId"
             }
           ]
         },
@@ -1411,16 +1349,13 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Fn::GetAtt": [
-                "SubscriptiononCreateUserauth0FunctionSubscriptiononCreateUserauth0FunctionAppSyncFunctionE9B4721A",
-                "FunctionId"
-              ]
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsSubscriptiononCreateCardsauth0FunctionSubscriptiononCreateCardsauth0FunctionAppSyncFunction8E85A22AFunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoQuerygetHelpMemopostAuth0FunctionQuerygetHelpMemopostAuth0FunctionAppSyncFunction8EF017D7FunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardspostAuth0FunctionQuerygetCardspostAuth0FunctionAppSyncFunction6C61730DFunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoSubscriptionOnCreateHelpMemoDataResolverFnSubscriptionOnCreateHelpMemoDataResolverFnAppSyncFunctionB5709B5FFunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsSubscriptionOnCreateCardsDataResolverFnSubscriptionOnCreateCardsDataResolverFnAppSyncFunction390A4D13FunctionId"
             }
           ]
         },
@@ -1467,16 +1402,13 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Fn::GetAtt": [
-                "SubscriptiononCreateUserauth0FunctionSubscriptiononCreateUserauth0FunctionAppSyncFunctionE9B4721A",
-                "FunctionId"
-              ]
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsSubscriptiononCreateCardsauth0FunctionSubscriptiononCreateCardsauth0FunctionAppSyncFunction8E85A22AFunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoQuerygetHelpMemopostAuth0FunctionQuerygetHelpMemopostAuth0FunctionAppSyncFunction8EF017D7FunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsQuerygetCardspostAuth0FunctionQuerygetCardspostAuth0FunctionAppSyncFunction6C61730DFunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackHelpMemoNestedStackHelpMemoNestedStackResource75F4E1C2OutputstransformerrootstackHelpMemoSubscriptionOnCreateHelpMemoDataResolverFnSubscriptionOnCreateHelpMemoDataResolverFnAppSyncFunctionB5709B5FFunctionId"
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsSubscriptionOnCreateCardsDataResolverFnSubscriptionOnCreateCardsDataResolverFnAppSyncFunction390A4D13FunctionId"
             }
           ]
         },
@@ -1511,51 +1443,6 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "UserOwnerDataResolverFnUserOwnerDataResolverFnAppSyncFunction78EE3B72": {
-      "Type": "AWS::AppSync::FunctionConfiguration",
-      "Properties": {
-        "ApiId": {
-          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
-        },
-        "DataSourceName": {
-          "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
-        },
-        "FunctionVersion": "2018-05-29",
-        "Name": "UserOwnerDataResolverFn",
-        "RequestMappingTemplateS3Location": {
-          "Fn::Join": [
-            "",
-            [
-              "s3://",
-              {
-                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
-              },
-              "/",
-              {
-                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
-              },
-              "/resolvers/User.owner.req.vtl"
-            ]
-          ]
-        },
-        "ResponseMappingTemplateS3Location": {
-          "Fn::Join": [
-            "",
-            [
-              "s3://",
-              {
-                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
-              },
-              "/",
-              {
-                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
-              },
-              "/resolvers/User.owner.res.vtl"
-            ]
-          ]
-        }
-      }
-    },
     "UserownerResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
@@ -1568,10 +1455,7 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Fn::GetAtt": [
-                "UserOwnerDataResolverFnUserOwnerDataResolverFnAppSyncFunction78EE3B72",
-                "FunctionId"
-              ]
+              "Ref": "referencetotransformerrootstackCardsNestedStackCardsNestedStackResource06D0BC53OutputstransformerrootstackCardsCardsOwnerDataResolverFnCardsOwnerDataResolverFnAppSyncFunctionDFD6E2C5FunctionId"
             }
           ]
         },
@@ -1669,19 +1553,6 @@
             ]
           ]
         }
-      }
-    },
-    "transformerrootstackUserUserDataSourceA8C4C398Name": {
-      "Value": {
-        "Fn::GetAtt": [
-          "UserDataSource",
-          "Name"
-        ]
-      }
-    },
-    "transformerrootstackUserUserTableA7A02430Ref": {
-      "Value": {
-        "Ref": "UserTable"
       }
     }
   }
