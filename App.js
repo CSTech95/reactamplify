@@ -17,7 +17,7 @@ function App() {
 	return (
 		//<View style={styles.container}>
 		<NavigationContainer>
-			<Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
+			<Stack.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: "center" }}>
 				{/*<StatusBar />*/}
 				{/*<Home />*/}
 				<Stack.Screen name="Home" component={Home} />
