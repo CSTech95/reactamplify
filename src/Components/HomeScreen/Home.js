@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Pressable, StyleSheet, Text, View, Platform } from "react-native";
-import { TextInput } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
+
 import { DataStore } from "aws-amplify";
-import { Vehicle } from "../models";
-import Header from "./Header";
+import { Vehicle } from "../../models";
+
+import Header from "../Header";
 import { Auth } from "aws-amplify";
+
+import { User } from "../../models";
+import MyRentals from "./MyRentals";
 
 const AddVehicle = () => {
 	const [make, setMake] = useState("");
 	const [model, setModel] = useState("");
+	const [vehicles, setVehicles] = useState([]);
+
 	async function addVehicle() {
 		await DataStore.save(
 			new Vehicle({
@@ -20,29 +27,42 @@ const AddVehicle = () => {
 				img: "image-placeholder",
 			})
 		);
-		console.log("Car has been added. Check the DynamoDB database on Amplify. Or Check Content tab in Amplify Studio SideBar");
+		console.log("Vehicle has been added. Check the DynamoDB database on Amplify. Or Check Content tab in Amplify Studio SideBar");
 		setMake("");
 		setModel("");
 		//addVehicle();
 	}
 
+	useEffect(() => {
+		async function asyncCall() {
+			const vehicleS = await DataStore.query(Vehicle);
+			console.log(vehicleS);
+			console.log("Got vehicle");
+			setVehicles(vehicleS);
+		}
+		asyncCall();
+	}, []);
+
 	return (
-		<>
+		<View>
+			{/*{vehicles.map((vehicle) => (
+				<Text>{vehicle.make}</Text>
+			))}*/}
 			<View>
 				<TextInput style={{ height: 40 }} placeholder="Enter Make" onChangeText={(newMake) => setMake(newMake)} defaultValue={make} />
+				{/*<TextInput style={{ height: 40 }} placeholder={User} onChangeText={(newMake) => setMake(newMake)} defaultValue={make} />*/}
 			</View>
 			<View>
 				<TextInput style={{ height: 40 }} placeholder="Enter Model" onChangeText={(newModel) => setModel(newModel)} defaultValue={model} />
 			</View>
-
-			<Pressable onPress={addVehicle} style={styles.buttonContainer}>
+			<Button onPress={addVehicle} style={styles.buttonContainer}>
 				<Text style={styles.buttonText}>Add Vehicle</Text>
-			</Pressable>
-
+			</Button>
 			<Pressable onPress={() => Auth.signOut()} style={styles.buttonContainer}>
 				<Text style={styles.buttonText}>Sign out</Text>
 			</Pressable>
-		</>
+			<MyRentals rentals={vehicles} />
+		</View>
 	);
 };
 
@@ -50,9 +70,10 @@ const Home = () => {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	return (
-		<>
+		<View>
 			<AddVehicle />
-		</>
+			{/*<MyRentals />*/}
+		</View>
 	);
 };
 
