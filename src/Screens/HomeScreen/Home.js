@@ -5,79 +5,41 @@ import { Button, TextInput } from "react-native-paper";
 import { DataStore } from "aws-amplify";
 import { Vehicle } from "../../models";
 
-import Header from "../Header";
 import { Auth } from "aws-amplify";
 
 import { User } from "../../models";
-import MyRentals from "./MyRentals";
-
-const AddVehicle = () => {
-	const [make, setMake] = useState("");
-	const [model, setModel] = useState("");
-	const [vehicles, setVehicles] = useState([]);
-
-	async function addVehicle() {
-		await DataStore.save(
-			new Vehicle({
-				make: make,
-				model: model,
-				isAvailable: true,
-				//year: 2018,
-				//vehicleType: "SUV",
-				img: "image-placeholder",
-			})
-		);
-		console.log("Vehicle has been added. Check the DynamoDB database on Amplify. Or Check Content tab in Amplify Studio SideBar");
-		setMake("");
-		setModel("");
-		//addVehicle();
-	}
-
-	useEffect(() => {
-		async function asyncCall() {
-			const vehicleS = await DataStore.query(Vehicle);
-			console.log(vehicleS);
-			console.log("Got vehicle");
-			setVehicles(vehicleS);
-		}
-		asyncCall();
-	}, []);
-
-	return (
-		<View>
-			{/*{vehicles.map((vehicle) => (
-				<Text>{vehicle.make}</Text>
-			))}*/}
-			<View>
-				<TextInput style={{ height: 40 }} placeholder="Enter Make" onChangeText={(newMake) => setMake(newMake)} defaultValue={make} />
-				{/*<TextInput style={{ height: 40 }} placeholder={User} onChangeText={(newMake) => setMake(newMake)} defaultValue={make} />*/}
-			</View>
-			<View>
-				<TextInput style={{ height: 40 }} placeholder="Enter Model" onChangeText={(newModel) => setModel(newModel)} defaultValue={model} />
-			</View>
-			<Button onPress={addVehicle} style={styles.buttonContainer}>
-				<Text style={styles.buttonText}>Add Vehicle</Text>
-			</Button>
-			<Pressable onPress={() => Auth.signOut()} style={styles.buttonContainer}>
-				<Text style={styles.buttonText}>Sign out</Text>
-			</Pressable>
-			<MyRentals rentals={vehicles} />
-		</View>
-	);
-};
+import MyRentals from "../MyRentals/MyRentals";
+import AddVehicle from "../../Components/AddVehicle";
 
 const Home = () => {
 	const [modalVisible, setModalVisible] = useState(false);
+	const [vehicles, setVehicles] = useState([]);
+
+	//useEffect(() => {
+	//	async function asyncCall() {
+	//		const vehicleS = await DataStore.query(Vehicle);
+	//		console.log(vehicleS);
+	//		console.log("Got vehicle");
+	//		setVehicles(vehicleS);
+	//	}
+	//	asyncCall();
+	//}, []);
 
 	return (
 		<View>
 			<AddVehicle />
-			{/*<MyRentals />*/}
+			{/*<MyRentals rentals={vehicles} />*/}
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
+	container: {
+		//flex: 1,
+		flexDirection: "row",
+		justifyContent: "center",
+	},
+
 	headerContainer: {
 		backgroundColor: "#4696ec",
 		paddingTop: Platform.OS === "ios" ? 44 : 0,
@@ -129,9 +91,9 @@ const styles = StyleSheet.create({
 	},
 	buttonContainer: {
 		alignSelf: "center",
-		backgroundColor: "#4696ec",
-		borderRadius: 99,
-		paddingHorizontal: 8,
+		//backgroundColor: "#4696ec",
+		borderRadius: 30,
+		paddingHorizontal: 2,
 	},
 	floatingButton: {
 		position: "absolute",
