@@ -58,7 +58,7 @@ function MyTabs() {
 				}}
 			/>
 			<Tab.Screen
-				//TODO:: Make screen Account that has profile & payment details
+				//TODO:: Make Account Screen that has profile & payment details
 				name="Account"
 				component={Payments}
 				options={{
