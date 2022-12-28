@@ -58,7 +58,8 @@ function MyTabs() {
 				}}
 			/>
 			<Tab.Screen
-				name="Payments"
+				//TODO:: Make screen Account that has profile & payment details
+				name="Account"
 				component={Payments}
 				options={{
 					headerRight: () => <SignOut style={styles.signoutBtn} />,
