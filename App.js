@@ -13,12 +13,12 @@ import { withAuthenticator } from "aws-amplify-react-native";
 
 Amplify.configure({ ...awsConfig, Analytics: { disabled: true } });
 
-import Home from "./src/Screens/HomeScreen/Home";
+import Home from "./src/Screens/Home/Home";
 import MyRentals from "./src/Screens/MyRentals/MyRentals";
-import { HelpMemos } from "./src/Screens/HelpMemos/HelpMemos";
+import { HelpMemos } from "./src/Components/HelpMemos/HelpMemos";
 import { RentVehicles } from "./src/Screens/RentVehicles/RentVehicles";
-import { Payments } from "./src/Screens/Payments/Payments";
-import SignOut from "./src/Screens/SignOut/SignOut";
+import { Payments } from "./src/Screens/Account/Account";
+import SignOut from "./src/Components/SignOut/SignOut";
 
 //const Stack = createNativeStackNavigator();
 
@@ -44,15 +44,15 @@ function MyTabs() {
 				}}
 			/>
 			<Tab.Screen
-				name="Help Memos"
-				component={HelpMemos}
+				name="Find Rentals"
+				component={RentVehicles}
 				options={{
 					headerRight: () => <SignOut style={styles.signoutBtn} />,
 				}}
 			/>
 			<Tab.Screen
-				name="Find Rentals"
-				component={RentVehicles}
+				name="Help"
+				component={HelpMemos}
 				options={{
 					headerRight: () => <SignOut style={styles.signoutBtn} />,
 				}}

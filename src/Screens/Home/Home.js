@@ -9,7 +9,7 @@ import { Auth } from "aws-amplify";
 
 import { User } from "../../models";
 import MyRentals from "../MyRentals/MyRentals";
-import AddVehicle from "../../Components/AddVehicle";
+import AddVehicle from "../../Components/AddVehicle/AddVehicle";
 
 const Home = () => {
 	const [modalVisible, setModalVisible] = useState(false);
