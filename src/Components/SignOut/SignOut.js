@@ -1,8 +1,7 @@
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import React, { Component } from "react";
 import { Button, TextInput } from "react-native-paper";
 import { Auth } from "aws-amplify";
-import { View } from "react-native-web";
 
 export class SignOut extends Component {
 	render() {
