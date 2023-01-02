@@ -25,8 +25,8 @@ const MyRentals = () => {
 		<ScrollView>
 			<List.Section title="My Rentals">
 				{myRentals.map((rental) => (
-					<List.Accordion title={rental.vehicleType} description={rental.make} left={(props) => <List.Icon {...props} icon="car-multiple" />}>
-						<View>
+					<List.Accordion title={rental.vehicleType} description={rental.make} left={(props) => <List.Icon {...props} icon="car" />}>
+						<View key={rental.id}>
 							<List.Item title={rental.make} />
 							<List.Item title={rental.model} />
 						</View>
@@ -34,17 +34,6 @@ const MyRentals = () => {
 				))}
 			</List.Section>
 		</ScrollView>
-		//<List.Section title="Accordions">
-		//	<List.Accordion title="My Rentals" left={(props) => <List.Icon {...props} icon="car-multiple" />}>
-		//		<List.Item title="First item" />
-		//		{props.rentals.map((rental) => (
-		//			<>
-		//				<List.Item title={rental.make} />
-		//				<List.Item title={rental.model} />
-		//			</>
-		//		))}
-		//	</List.Accordion>
-		//</List.Section>
 	);
 };
 const styles = StyleSheet.create({

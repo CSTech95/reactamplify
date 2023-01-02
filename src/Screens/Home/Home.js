@@ -15,16 +15,6 @@ const Home = () => {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [vehicles, setVehicles] = useState([]);
 
-	//useEffect(() => {
-	//	async function asyncCall() {
-	//		const vehicleS = await DataStore.query(Vehicle);
-	//		console.log(vehicleS);
-	//		console.log("Got vehicle");
-	//		setVehicles(vehicleS);
-	//	}
-	//	asyncCall();
-	//}, []);
-
 	return (
 		<View>
 			<AddVehicle />

@@ -28,12 +28,12 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
 	return (
-		<Tab.Navigator>
+		<Tab.Navigator style={styles.container}>
 			<Tab.Screen
 				name="Home"
 				component={Home}
 				options={{
-					headerRight: () => <SignOut style={styles.signoutBtn} />,
+					headerRight: () => <SignOut />,
 				}}
 			/>
 			<Tab.Screen
@@ -79,14 +79,14 @@ function MyTabs() {
 
 function App() {
 	return (
-		<View style={styles.container}>
-			<NavigationContainer>
-				{/*<Stack.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: "center" }}>
+		<NavigationContainer>
+			{/*<Stack.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: "center" }}>
 					<Stack.Screen name="Home" component={Home} />
 				</Stack.Navigator>*/}
+			<View style={styles.container}>
 				<MyTabs />
-			</NavigationContainer>
-		</View>
+			</View>
+		</NavigationContainer>
 	);
 }
 
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
 	},
 	signoutBtn: {
 		//flex: 1,
+		margin: 9,
 	},
 });
 

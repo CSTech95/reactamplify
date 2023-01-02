@@ -26,3 +26,6 @@ https://github.com/web-ridge/react-native-paper-dates
 
 Controlled Inputs
 https://reactjs.org/docs/forms.html#controlled-components
+
+Material Design Icons
+https://materialdesignicons.com/
