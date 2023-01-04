@@ -15,7 +15,7 @@ Amplify.configure({ ...awsConfig, Analytics: { disabled: true } });
 
 import Home from "./src/Screens/HomeScreen/Home";
 import MyRentals from "./src/Screens/MyRentals/MyRentals";
-import { HelpMemos } from "./src/Screens/HelpMemos/HelpMemos";
+import HelpMemos from "./src/Screens/HelpMemos/HelpMemos";
 import { RentVehicles } from "./src/Screens/RentVehicles/RentVehicles";
 import { Payments } from "./src/Screens/Payments/Payments";
 import SignOut from "./src/Screens/SignOut/SignOut";
