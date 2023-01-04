@@ -14,6 +14,13 @@ export default class MyProfile extends React.Component {
         this.getAttributes();
         this.state = {
             name: "",
+            birthday: "",
+            phone: "",
+            address1: "",
+            address2: "",
+            city: "",
+            state: "",
+            zipcode: "",
         }
     }
 
@@ -22,7 +29,14 @@ export default class MyProfile extends React.Component {
         console.log('attributes:', user.attributes);
 
         this.setState({
-            name: user.attributes['name']
+            name: user.attributes['name'],
+            birthday: user.attributes['birthday'],
+            phone: user.attributes['phone'],
+            address1: user.attributes['address1'],
+            address2: user.attributes['address2'],
+            city: user.attributes['city'],
+            state: user.attributes['state'],
+            zipcode: user.attributes['zipcode'],
         })
         this.forceUpdate()
     }
@@ -49,11 +63,68 @@ export default class MyProfile extends React.Component {
                                 navigation={this.props.navigation}
                                 title="My Profile"
                             />
+                            <MainTextInput
+                                placeholder="Full Name"
+                                title="Name"
+                                value={this.state.name}
+                                maxLength={255}
+                                keyboardType="name"
+                                onChangeText={(str) => this.setState({ name: str })} />
+                            <MainTextInput
+                                placeholder="MM/DD/YY"
+                                title="Date of Birth"
+                                value={this.state.birthday}
+                                maxLength={255}
+                                keyboardType="birthdate-full"
+                                onChangeText={(str) => this.setState({ name: str })} />
+                            <MainTextInput
+                                placeholder="Phone Number"
+                                title="Phone Number"
+                                value={this.state.phone}
+                                maxLength={255}
+                                keyboardType="tel"
+                                onChangeText={(str) => this.setState({ name: str })} />
+                            <MainTextInput
+                                placeholder="Street Address"
+                                title="Address 1"
+                                value={this.state.address1}
+                                maxLength={255}
+                                keyboardType="tel"
+                                onChangeText={(str) => this.setState({ name: str })} />
+                            <MainTextInput
+                                placeholder="Apt, Suite, Unit, Building (optional)"
+                                title="Address 2"
+                                value={this.state.address2}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ name: str })} />
+                            <MainTextInput
+                                placeholder="City"
+                                title="City"
+                                value={this.state.city}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ name: str })} />
+                            <MainTextInput
+                                placeholder="State"
+                                title="State"
+                                value={this.state.state}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ name: str })} />
+                            <MainTextInput
+                                placeholder="5 digit number"
+                                title="Zip Code"
+                                value={this.state.zipcode}
+                                maxLength={255}
+                                keyboardType="postal-code"
+                                onChangeText={(str) => this.setState({ name: str })} />
                             <MyButton
-                                title="SIGN OUT"
-                                color="#FFFFFF"
+                                title="SAVE CHANGES"
+                                color="#06A500"
                                 titleColor="#ffffff"
-                                onPress={this.signOutCall} />
+                                onPress={this.signInCall} />
+
                         </View>
                     </View>
 

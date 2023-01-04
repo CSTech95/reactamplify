@@ -28,7 +28,7 @@ export default class SignUp extends React.Component {
         this.onChangeEmail.bind(this);
         this.signUpCall.bind(this);
 
-        
+
     }
 
     onChangeName = (name) => {
@@ -109,10 +109,18 @@ export default class SignUp extends React.Component {
         var namee = this.state.name;
 
         Auth.signUp({
-            username: emaill, 
+            username: emaill,
             password: psww,
             attributes: {
-                email: emaill, name: namee
+                email: emaill,
+                name: namee,
+                birthday: "",
+                phone: "",
+                address1: "",
+                address2: "",
+                city: "",
+                state: "",
+                zipcode: "",
             }
         });
 

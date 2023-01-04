@@ -10,8 +10,12 @@ export default class MainTextInput extends React.Component {
         return (
             // <SafeAreaView>
             <View style={styles.input_container}>
+                {this.props.title &&
+                    <Text style={styles.title}>{this.props.title}</Text>
+                }
                 <View
                     style={styles.input_box}>
+
                     <TextInput
                         style={styles.input}
                         onChangeText={this.props.onChangeText}
@@ -45,16 +49,18 @@ export default class MainTextInput extends React.Component {
 };
 
 const styles = StyleSheet.create({
+    input_container: {
+        marginTop: 20,
+    },
     input_box: {
         flexDirection: 'row',
         height: 52,
-        marginTop: 20,
         paddingStart: 12,
         paddingEnd: 8,
         justifyContent: 'center',
         backgroundColor: '#FFFFFF',
         borderColor: '#06A500',
-        borderWidth: 1, 
+        borderWidth: 1,
     },
     input: {
         fontSize: 14,
@@ -80,5 +86,10 @@ const styles = StyleSheet.create({
         color: "#E62C18",
         fontSize: 14,
         marginTop: 8,
+    },
+    title: {
+        marginBottom: 8,
+        fontSize: 14,
+
     }
 });
