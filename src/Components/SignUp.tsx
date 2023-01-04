@@ -98,7 +98,6 @@ export default class SignUp extends React.Component {
         return false;
     }
 
-
     signUpCall = () => {
 
         //api 호출
@@ -169,7 +168,7 @@ export default class SignUp extends React.Component {
                                 title="SIGN UP"
                                 color="#06A500"
                                 titleColor="#ffffff"
-                                onPress={this.onSignIn} />
+                                onPress={this.signUpCall} />
                         </View>
                     </View>
 
