@@ -13,12 +13,16 @@ import { withAuthenticator } from "aws-amplify-react-native";
 
 Amplify.configure({ ...awsConfig, Analytics: { disabled: true } });
 
-import Home from "./src/Screens/HomeScreen/Home";
+import Home from "./src/Screens/Home/Home";
 import MyRentals from "./src/Screens/MyRentals/MyRentals";
+<<<<<<< HEAD
 import HelpMemos from "./src/Screens/HelpMemos/HelpMemos";
+=======
+import { HelpMemos } from "./src/Components/HelpMemos/HelpMemos";
+>>>>>>> d11f476d6753260bb5ea71388d8a7e48212d7f85
 import { RentVehicles } from "./src/Screens/RentVehicles/RentVehicles";
-import { Payments } from "./src/Screens/Payments/Payments";
-import SignOut from "./src/Screens/SignOut/SignOut";
+import { Payments } from "./src/Screens/Account/Account";
+import SignOut from "./src/Components/SignOut/SignOut";
 
 //const Stack = createNativeStackNavigator();
 
@@ -28,24 +32,17 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
 	return (
-		<Tab.Navigator>
+		<Tab.Navigator style={styles.container}>
 			<Tab.Screen
 				name="Home"
 				component={Home}
 				options={{
-					headerRight: () => <SignOut style={styles.signoutBtn} />,
+					headerRight: () => <SignOut />,
 				}}
 			/>
 			<Tab.Screen
 				name="My Rentals"
 				component={MyRentals}
-				options={{
-					headerRight: () => <SignOut style={styles.signoutBtn} />,
-				}}
-			/>
-			<Tab.Screen
-				name="Help Memos"
-				component={HelpMemos}
 				options={{
 					headerRight: () => <SignOut style={styles.signoutBtn} />,
 				}}
@@ -58,7 +55,15 @@ function MyTabs() {
 				}}
 			/>
 			<Tab.Screen
-				name="Payments"
+				name="Help"
+				component={HelpMemos}
+				options={{
+					headerRight: () => <SignOut style={styles.signoutBtn} />,
+				}}
+			/>
+			<Tab.Screen
+				//TODO:: Make Account Screen that has profile & payment details
+				name="Account"
 				component={Payments}
 				options={{
 					headerRight: () => <SignOut style={styles.signoutBtn} />,
@@ -78,14 +83,14 @@ function MyTabs() {
 
 function App() {
 	return (
-		<View style={styles.container}>
-			<NavigationContainer>
-				{/*<Stack.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: "center" }}>
+		<NavigationContainer>
+			{/*<Stack.Navigator initialRouteName="Home" screenOptions={{ headerTitleAlign: "center" }}>
 					<Stack.Screen name="Home" component={Home} />
 				</Stack.Navigator>*/}
+			<View style={styles.container}>
 				<MyTabs />
-			</NavigationContainer>
-		</View>
+			</View>
+		</NavigationContainer>
 	);
 }
 
@@ -96,6 +101,7 @@ const styles = StyleSheet.create({
 	},
 	signoutBtn: {
 		//flex: 1,
+		margin: 9,
 	},
 });
 

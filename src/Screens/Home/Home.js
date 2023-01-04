@@ -9,21 +9,11 @@ import { Auth } from "aws-amplify";
 
 import { User } from "../../models";
 import MyRentals from "../MyRentals/MyRentals";
-import AddVehicle from "../../Components/AddVehicle";
+import AddVehicle from "../../Components/AddVehicle/AddVehicle";
 
 const Home = () => {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [vehicles, setVehicles] = useState([]);
-
-	//useEffect(() => {
-	//	async function asyncCall() {
-	//		const vehicleS = await DataStore.query(Vehicle);
-	//		console.log(vehicleS);
-	//		console.log("Got vehicle");
-	//		setVehicles(vehicleS);
-	//	}
-	//	asyncCall();
-	//}, []);
 
 	return (
 		<View>
