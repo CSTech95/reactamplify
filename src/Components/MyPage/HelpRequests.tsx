@@ -1,12 +1,12 @@
 import React from "react"
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import MyHeader from '../ui/MyHeader';
-import MainTextInput from '../ui/MainTextInput';
-import AdBlock from "../ui/AdBlock";
-import MyButton from "../ui/MyButton";
+import MyHeader from '../../ui/MyHeader';
+import MainTextInput from '../../ui/MainTextInput';
+import AdBlock from "../../ui/AdBlock";
+import MyButton from "../../ui/MyButton";
 import { Auth } from 'aws-amplify';
 
-export default class MyPage extends React.Component {
+export default class HelpRequests extends React.Component {
 
     constructor(props) {
         super(props);
@@ -43,10 +43,10 @@ export default class MyPage extends React.Component {
                 <View style={styles.contents}>
                     <View style={styles.half_box}>
                         <View style={styles.sign_box}>
-                            <Text style={styles.sub_title}>Hello, {this.state.name}</Text>
+                            <Text style={styles.sub_title}>My Profile</Text>
                             <MyButton
                                 title="SIGN OUT"
-                                color="#06A500"
+                                color="#FFFFFF"
                                 titleColor="#ffffff"
                                 onPress={this.signOutCall} />
                         </View>
