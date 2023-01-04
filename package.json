@@ -27,13 +27,8 @@
     "react-native": "0.69.6",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-paper": "^5.1.0",
-<<<<<<< HEAD
     "react-native-reanimated": "^2.13.0",
     "react-native-safe-area-context": "^4.4.1",
-=======
-    "react-native-reanimated": "~2.9.1",
-    "react-native-safe-area-context": "4.3.1",
->>>>>>> d11f476d6753260bb5ea71388d8a7e48212d7f85
     "react-native-screens": "~3.15.0",
     "react-native-web": "~0.18.7"
   },

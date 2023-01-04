@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+//import * as React from "react";
 import { DataStore } from "aws-amplify";
 import { HelpMemo } from "../../models/";
 import { List } from "react-native-paper";
@@ -33,32 +34,20 @@ const HelpMemos = () => {
 					))
 				}
 			</List.Section>
+            {/* <RentalsCreateForm /> */}
 		</ScrollView>
 	)
 };
-
 const styles = StyleSheet.create({
-	container: {
-		backgroundColor: "#fff",
-		flex: 1,
-		flexDirection: "row",
-		//width: wp(50),
-		//width: "100%",
-	},
-	//scrollContainer: {
-	//},
+    container: {
+        backgroundColor: "#fff",
+        flex: 1,
+        flexDirection: "row",
+        //width: wp(50),
+        //width: "100%",
+    },
+    //scrollContainer: {
+    //},
 });
 
-// export class HelpMemos extends Component {
-// 	render() {
-// 		return (
-// 			<View>
-// 				<Text>HelpMemos</Text>
-// 			</View>
-// 		);
-// 	}
-// }
-
 export default HelpMemos;
-
-
