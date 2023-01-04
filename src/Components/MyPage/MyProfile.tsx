@@ -41,8 +41,11 @@ export default class MyProfile extends React.Component {
         this.forceUpdate()
     }
 
-    signOutCall = () => {
-        Auth.signOut();
+    SaveChanges = () => {
+        //HERE IS WHERE YOU NEED TO WORK ON
+
+        //WHEN EVERYTHING IS COMPLETED
+        this.props.navigation.goBack(null)
     }
 
 
@@ -123,7 +126,7 @@ export default class MyProfile extends React.Component {
                                 title="SAVE CHANGES"
                                 color="#06A500"
                                 titleColor="#ffffff"
-                                onPress={this.signInCall} />
+                                onPress={this.saveChanges} />
 
                         </View>
                     </View>

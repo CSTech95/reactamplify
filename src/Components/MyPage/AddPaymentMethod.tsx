@@ -13,7 +13,13 @@ export default class AddPaymentMethod extends React.Component {
         super(props);
         this.getAttributes();
         this.state = {
-            name: "",
+            c_type: "",
+            c_name: "",
+            c_num: "",
+            exp_date: "",
+            cvv: "",
+            addr1: "",
+            addr2: "",
         }
     }
 
