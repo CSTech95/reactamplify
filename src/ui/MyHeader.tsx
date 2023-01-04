@@ -17,7 +17,7 @@ export default class MyHeader extends React.Component {
             switch (data.payload.event) {
                 case 'signIn':
                     props.navigation.navigate('Home');
-
+                    this.getAttributes();
                     console.log('user signed in');
                     break;
                 case 'signUp':
@@ -28,7 +28,7 @@ export default class MyHeader extends React.Component {
                     props.navigation.navigate('SignUp');
                     console.log('user signed out');
                     this.setState({
-                        name:""
+                        name: ""
                     });
                     break;
                 case 'signIn_failure':
@@ -95,14 +95,19 @@ export default class MyHeader extends React.Component {
                 </View>
 
                 {this.state.name &&
-                    <Text>Hello {this.state.name}</Text>
+                    <Text>{this.state.name} </Text>
                 }
 
                 {this.props.my_page &&
                     <TouchableOpacity
                         style={styles.icon_box}
-                        onPress={() =>
-                            this.props.navigation.navigate('SignUp')}
+                        onPress={() => {
+                            if (this.state.name)
+                                this.props.navigation.navigate('MyPage')
+                            else
+                                this.props.navigation.navigate('SignUp')
+                        }
+                        }
                     >
                         <Image
                             style={styles.right}
