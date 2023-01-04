@@ -47,7 +47,7 @@ export default class RequestNewHelp extends React.Component {
                             <SubHeader
                                 back="true"
                                 navigation={this.props.navigation}
-                                title="MyProfile"
+                                title="Request New Help"
                             />
                             <MyButton
                                 title="SIGN OUT"

@@ -47,7 +47,7 @@ export default class MyProfile extends React.Component {
                             <SubHeader
                                 back="true"
                                 navigation={this.props.navigation}
-                                title="MyProfile"
+                                title="My Profile"
                             />
                             <MyButton
                                 title="SIGN OUT"

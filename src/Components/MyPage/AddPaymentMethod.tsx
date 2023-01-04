@@ -47,7 +47,7 @@ export default class AddPaymentMethod extends React.Component {
                         <SubHeader
                                 back="true"
                                 navigation={this.props.navigation}
-                                title="MyProfile"
+                                title="Add Payment Method"
                             />
                             <MyButton
                                 title="SIGN OUT"

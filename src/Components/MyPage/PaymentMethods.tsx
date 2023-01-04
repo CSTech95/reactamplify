@@ -6,6 +6,7 @@ import AdBlock from "../../ui/AdBlock";
 import MyButton from "../../ui/MyButton";
 import { Auth } from 'aws-amplify';
 import SubHeader from "../../ui/SubHeader";
+import SimpleButton from "../../ui/SimpleButton";
 
 export default class PaymentMethods extends React.Component {
 
@@ -44,16 +45,14 @@ export default class PaymentMethods extends React.Component {
                 <View style={styles.contents}>
                     <View style={styles.half_box}>
                         <View style={styles.sign_box}>
-                        <SubHeader
+                            <SubHeader
                                 back="true"
                                 navigation={this.props.navigation}
-                                title="MyProfile"
+                                title="Payment Methods"
                             />
-                            <MyButton
-                                title="SIGN OUT"
-                                color="#FFFFFF"
-                                titleColor="#ffffff"
-                                onPress={this.signOutCall} />
+                            <SimpleButton
+                                title="Add Payment Method"
+                                onPress={() => this.props.navigation.navigate('AddPaymentMethod')} />
                         </View>
                     </View>
 
