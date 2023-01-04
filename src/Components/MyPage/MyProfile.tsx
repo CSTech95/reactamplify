@@ -79,49 +79,49 @@ export default class MyProfile extends React.Component {
                                 value={this.state.birthday}
                                 maxLength={255}
                                 keyboardType="birthdate-full"
-                                onChangeText={(str) => this.setState({ name: str })} />
+                                onChangeText={(str) => this.setState({ birthday: str })} />
                             <MainTextInput
                                 placeholder="Phone Number"
                                 title="Phone Number"
                                 value={this.state.phone}
                                 maxLength={255}
                                 keyboardType="tel"
-                                onChangeText={(str) => this.setState({ name: str })} />
+                                onChangeText={(str) => this.setState({ phone: str })} />
                             <MainTextInput
                                 placeholder="Street Address"
                                 title="Address 1"
                                 value={this.state.address1}
                                 maxLength={255}
                                 keyboardType="tel"
-                                onChangeText={(str) => this.setState({ name: str })} />
+                                onChangeText={(str) => this.setState({ address1: str })} />
                             <MainTextInput
                                 placeholder="Apt, Suite, Unit, Building (optional)"
                                 title="Address 2"
                                 value={this.state.address2}
                                 maxLength={255}
                                 keyboardType="default"
-                                onChangeText={(str) => this.setState({ name: str })} />
+                                onChangeText={(str) => this.setState({ address2: str })} />
                             <MainTextInput
                                 placeholder="City"
                                 title="City"
                                 value={this.state.city}
                                 maxLength={255}
                                 keyboardType="default"
-                                onChangeText={(str) => this.setState({ name: str })} />
+                                onChangeText={(str) => this.setState({ city: str })} />
                             <MainTextInput
                                 placeholder="State"
                                 title="State"
                                 value={this.state.state}
                                 maxLength={255}
                                 keyboardType="default"
-                                onChangeText={(str) => this.setState({ name: str })} />
+                                onChangeText={(str) => this.setState({ state: str })} />
                             <MainTextInput
                                 placeholder="5 digit number"
                                 title="Zip Code"
                                 value={this.state.zipcode}
                                 maxLength={255}
                                 keyboardType="postal-code"
-                                onChangeText={(str) => this.setState({ name: str })} />
+                                onChangeText={(str) => this.setState({ zipcode: str })} />
                             <MyButton
                                 title="SAVE CHANGES"
                                 color="#06A500"

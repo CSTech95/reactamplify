@@ -11,27 +11,30 @@ export default class AddPaymentMethod extends React.Component {
 
     constructor(props) {
         super(props);
-        this.getAttributes();
+        // this.getAttributes();
         this.state = {
             c_type: "",
             c_name: "",
             c_num: "",
             exp_date: "",
             cvv: "",
-            addr1: "",
-            addr2: "",
+            address1: "",
+            address2: "",
+            city: "",
+            state: "",
+            zipcode: "",
         }
     }
 
-    async getAttributes() {
-        const user = await Auth.currentAuthenticatedUser();
-        console.log('attributes:', user.attributes);
+    // async getAttributes() {
+    //     const user = await Auth.currentAuthenticatedUser();
+    //     console.log('attributes:', user.attributes);
 
-        this.setState({
-            name: user.attributes['name']
-        })
-        this.forceUpdate()
-    }
+    //     this.setState({
+    //         name: user.attributes['name']
+    //     })
+    //     this.forceUpdate()
+    // }
 
     signOutCall = () => {
         Auth.signOut();
@@ -50,16 +53,87 @@ export default class AddPaymentMethod extends React.Component {
                 <View style={styles.contents}>
                     <View style={styles.half_box}>
                         <View style={styles.sign_box}>
-                        <SubHeader
+                            <SubHeader
                                 back="true"
                                 navigation={this.props.navigation}
                                 title="Add Payment Method"
                             />
+                            <MainTextInput
+                                placeholder="Visa/Master/etc"
+                                title="Card Type"
+                                value={this.state.c_type}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ c_type: str })} />
+                            <MainTextInput
+                                placeholder="Full name"
+                                title="Cardholder Name"
+                                value={this.state.c_name}
+                                maxLength={255}
+                                keyboardType="name"
+                                onChangeText={(str) => this.setState({ c_name: str })} />
+                            <MainTextInput
+                                placeholder="XXXX - XXXX - XXXX - XXXX"
+                                title="Card Number"
+                                value={this.state.c_num}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ c_num: str })} />
+                            <MainTextInput
+                                placeholder="MM/DD"
+                                title="Expire Date"
+                                value={this.state.exp_date}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ exp_date: str })} />
+                            <MainTextInput
+                                placeholder="3 digit number"
+                                title="CVV"
+                                value={this.state.cvv}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ cvv: str })} />
+                            <MainTextInput
+                                placeholder="Street Address"
+                                title="Address 1"
+                                value={this.state.address1}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ address1: str })} />
+                            <MainTextInput
+                                placeholder="Apt, Suite, Unit, Building (optional)"
+                                title="Address 2"
+                                value={this.state.address2}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ address2: str })} />
+                            <MainTextInput
+                                placeholder="City"
+                                title="City"
+                                value={this.state.city}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ city: str })} />
+                            <MainTextInput
+                                placeholder="State"
+                                title="State"
+                                value={this.state.state}
+                                maxLength={255}
+                                keyboardType="default"
+                                onChangeText={(str) => this.setState({ state: str })} />
+                            <MainTextInput
+                                placeholder="5 digit number"
+                                title="Zip Code"
+                                value={this.state.zipcode}
+                                maxLength={255}
+                                keyboardType="postal-code"
+                                onChangeText={(str) => this.setState({ zipcode: str })} />
                             <MyButton
-                                title="SIGN OUT"
-                                color="#FFFFFF"
+                                title="ADD PAYMENT METHOD"
+                                color="#06A500"
                                 titleColor="#ffffff"
-                                onPress={this.signOutCall} />
+                                onPress={this.saveChanges} />
+
                         </View>
                     </View>
 
