@@ -7,19 +7,21 @@ import SignIn from "./components/SignIn";
 
 const Stack = createStackNavigator()
 
-const Routes = () => {
+export default class Routes extends React.Component {
 
-    return (
-        <NavigationContainer >
-            <Stack.Navigator>
-                <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
-                <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
+    render() {
+        return (
+            <NavigationContainer >
+                <Stack.Navigator>
+                    <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+                    <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
+                    <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
 
-                <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-            </Stack.Navigator>
+                    
+                </Stack.Navigator>
 
-        </NavigationContainer>
-    );
+            </NavigationContainer>
+        );
+    }
 };
 
-export default Routes;

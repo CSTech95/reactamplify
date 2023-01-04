@@ -4,6 +4,7 @@ import MyHeader from '../ui/MyHeader';
 import MainTextInput from '../ui/MainTextInput';
 import AdBlock from "../ui/AdBlock";
 import MyButton from "../ui/MyButton";
+import { Hub, Auth } from 'aws-amplify';
 
 export default class SignIn extends React.Component {
 
@@ -11,8 +12,8 @@ export default class SignIn extends React.Component {
         super(props);
         this.state = {
             name: "",
-            email: "test@gmail.com",
-            psw1: "Testing1!",
+            email: "bbb@gmail.com",
+            psw1: "aaaaAAAA1!",
             psw2: "",
             name_war: false,
             name_war_msg: "You can only type letters. Type your full name.",
@@ -105,9 +106,12 @@ export default class SignIn extends React.Component {
         var emaill = this.state.email;
         var psww = this.state.psw1;
 
+        Auth.signIn(emaill, psww);
 
 
     }
+
+
 
     render() {
         return (

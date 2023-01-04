@@ -4,6 +4,7 @@ import MyHeader from '../ui/MyHeader';
 import MainTextInput from '../ui/MainTextInput';
 import AdBlock from "../ui/AdBlock";
 import MyButton from "../ui/MyButton";
+import { Auth } from 'aws-amplify';
 
 export default class SignUp extends React.Component {
 
@@ -26,6 +27,8 @@ export default class SignUp extends React.Component {
         this.onChangeName.bind(this);
         this.onChangeEmail.bind(this);
         this.signUpCall.bind(this);
+
+        
     }
 
     onChangeName = (name) => {
@@ -103,8 +106,15 @@ export default class SignUp extends React.Component {
         //api 호출
         var emaill = this.state.email;
         var psww = this.state.psw1;
+        var namee = this.state.name;
 
-
+        Auth.signUp({
+            username: emaill, 
+            password: psww,
+            attributes: {
+                email: emaill, name: namee
+            }
+        });
 
     }
 
