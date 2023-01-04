@@ -11,8 +11,8 @@ export default class SignIn extends React.Component {
         super(props);
         this.state = {
             name: "",
-            email: "",
-            psw1: "",
+            email: "test@gmail.com",
+            psw1: "Testing1!",
             psw2: "",
             name_war: false,
             name_war_msg: "You can only type letters. Type your full name.",
