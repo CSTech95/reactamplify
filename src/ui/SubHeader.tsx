@@ -28,13 +28,13 @@ export default class SubHeader extends React.Component {
                             source={require('../../assets/img/back.png')} />
                     </TouchableOpacity>
                 }
-                
+
                 <View style={styles.title_box}>
                     <Text style={styles.title}>
-                        Car Renting
+                        {this.props.title}
                     </Text>
                 </View>
-                
+
                 {this.props.my_page &&
                     <TouchableOpacity
                         style={styles.icon_box}
@@ -54,9 +54,9 @@ export default class SubHeader extends React.Component {
                         <Text style={styles.title}>SAVE</Text>
                     </TouchableOpacity>
                 }
-                {this.props.emptyRight &&
+                {/* {this.props.emptyRight && */}
                     <View style={styles.icon_box}></View>
-                }
+                {/* } */}
 
             </View>
         );
@@ -91,5 +91,6 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
+        fontWeight: 'bold',
     }
 });

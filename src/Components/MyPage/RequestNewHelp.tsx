@@ -5,6 +5,7 @@ import MainTextInput from '../../ui/MainTextInput';
 import AdBlock from "../../ui/AdBlock";
 import MyButton from "../../ui/MyButton";
 import { Auth } from 'aws-amplify';
+import SubHeader from "../../ui/SubHeader";
 
 export default class RequestNewHelp extends React.Component {
 
@@ -43,7 +44,11 @@ export default class RequestNewHelp extends React.Component {
                 <View style={styles.contents}>
                     <View style={styles.half_box}>
                         <View style={styles.sign_box}>
-                            <Text style={styles.sub_title}>My Profile</Text>
+                            <SubHeader
+                                back="true"
+                                navigation={this.props.navigation}
+                                title="MyProfile"
+                            />
                             <MyButton
                                 title="SIGN OUT"
                                 color="#FFFFFF"
