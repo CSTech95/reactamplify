@@ -25,7 +25,7 @@ export default class AdBlock extends React.Component {
 const styles = StyleSheet.create({
     button: {
         width: '100%',
-        height: 350,
+        height: 400,
         marginTop: 24,
         justifyContent: 'center',
         alignItems: 'center',
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     ad: {
         width: '100%',
         maxWidth: '100%',
-        height: 370,
+        height: 400,
     }
 
 });
