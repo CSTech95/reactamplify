@@ -8,9 +8,7 @@ const VehicleTypes = {
   "SUV": "SUV",
   "TRUCK": "TRUCK",
   "MOTORCYCLE": "MOTORCYCLE",
-  "VAN": "VAN",
-  "BOAT": "BOAT",
-  "PLANE": "PLANE"
+  "VAN": "VAN"
 };
 
 const HelpTypes = {
@@ -33,12 +31,14 @@ const Months = {
   "DECEMBER": "DECEMBER"
 };
 
-const { HelpMemo, User, Vehicle } = initSchema(schema);
+const { Cards, HelpMemo, User, Vehicle, Inventory } = initSchema(schema);
 
 export {
+  Cards,
   HelpMemo,
   User,
   Vehicle,
+  Inventory,
   VehicleTypes,
   HelpTypes,
   Months

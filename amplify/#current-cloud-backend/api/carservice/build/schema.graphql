@@ -1,4 +1,25 @@
 
+type Cards @aws_iam @aws_cognito_user_pools {
+  id: ID!
+  cardNumber: Int
+  fName: String
+  lName: String
+  expMonth: Int
+  expYear: Int
+  secCode: Int
+  address: String
+  zip: Int
+  city: String
+  country: String
+  state: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+  owner: String
+}
+
 enum VehicleTypes {
   SEDAN
   COUPE
@@ -6,8 +27,6 @@ enum VehicleTypes {
   TRUCK
   MOTORCYCLE
   VAN
-  BOAT
-  PLANE
 }
 
 enum HelpTypes {
@@ -15,16 +34,16 @@ enum HelpTypes {
   BILLING
 }
 
-type HelpMemo @aws_iam @aws_api_key {
+type HelpMemo @aws_iam @aws_cognito_user_pools {
   id: ID!
   type: HelpTypes!
-  description: String!
-  createdAt: AWSDateTime
-  userID: ID!
+  description: String
+  createdAt: String
   updatedAt: AWSDateTime!
   _version: Int!
   _deleted: Boolean
   _lastChangedAt: AWSTimestamp!
+  owner: String
 }
 
 enum Months {
@@ -42,22 +61,21 @@ enum Months {
   DECEMBER
 }
 
-type User @aws_iam @aws_cognito_user_pools @aws_api_key {
+type User @aws_iam @aws_cognito_user_pools {
   id: ID!
   username: String
-  firstName: String!
-  lastName: String!
-  birthMonth: Months
+  firstName: String
+  lastName: String
+  birthMonth: String
   birthDay: String
   birthYear: String
   phoneNumber: String
-  houseNumber: Int!
-  houseStreet: String!
-  town: String!
-  state: String!
-  HelpMemos(filter: ModelHelpMemoFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelHelpMemoConnection
-  rentedVehicles(filter: ModelVehicleFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelVehicleConnection
-  country: String!
+  houseNumber: Int
+  houseStreet: String
+  zip: String
+  state: String
+  town: String
+  country: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   _version: Int!
@@ -66,15 +84,31 @@ type User @aws_iam @aws_cognito_user_pools @aws_api_key {
   owner: String
 }
 
-type Vehicle @aws_iam @aws_api_key {
+type Vehicle @aws_iam @aws_cognito_user_pools {
   id: ID!
-  Make: String!
-  Model: String!
-  isAvailable: Boolean!
-  year: Int!
-  vehicleType: VehicleTypes
-  userID: ID!
-  rentedBy: User
+  make: String
+  model: String
+  year: Int
+  vehicleType: String
+  img: String
+  startTime: String
+  endTime: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+  owner: String
+}
+
+type Inventory @aws_api_key @aws_iam {
+  id: ID!
+  make: String
+  model: String
+  isAvailable: Boolean
+  year: Int
+  vehicleType: String
+  img: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   _version: Int!
@@ -232,7 +266,156 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelHelpMemoConnection @aws_api_key @aws_iam @aws_cognito_user_pools {
+type ModelCardsConnection @aws_iam @aws_cognito_user_pools {
+  items: [Cards]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelCardsFilterInput {
+  id: ModelIDInput
+  cardNumber: ModelIntInput
+  fName: ModelStringInput
+  lName: ModelStringInput
+  expMonth: ModelIntInput
+  expYear: ModelIntInput
+  secCode: ModelIntInput
+  address: ModelStringInput
+  zip: ModelIntInput
+  city: ModelStringInput
+  country: ModelStringInput
+  state: ModelStringInput
+  and: [ModelCardsFilterInput]
+  or: [ModelCardsFilterInput]
+  not: ModelCardsFilterInput
+}
+
+type Query {
+  getCards(id: ID!): Cards @aws_iam @aws_cognito_user_pools
+  listCards(filter: ModelCardsFilterInput, limit: Int, nextToken: String): ModelCardsConnection @aws_iam @aws_cognito_user_pools
+  syncCards(filter: ModelCardsFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelCardsConnection @aws_iam @aws_cognito_user_pools
+  getHelpMemo(id: ID!): HelpMemo @aws_iam @aws_cognito_user_pools
+  listHelpMemos(filter: ModelHelpMemoFilterInput, limit: Int, nextToken: String): ModelHelpMemoConnection @aws_iam @aws_cognito_user_pools
+  syncHelpMemos(filter: ModelHelpMemoFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHelpMemoConnection @aws_iam @aws_cognito_user_pools
+  getUser(id: ID!): User @aws_iam @aws_cognito_user_pools
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection @aws_iam @aws_cognito_user_pools
+  syncUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelUserConnection @aws_iam @aws_cognito_user_pools
+  getVehicle(id: ID!): Vehicle @aws_iam @aws_cognito_user_pools
+  listVehicles(filter: ModelVehicleFilterInput, limit: Int, nextToken: String): ModelVehicleConnection @aws_iam @aws_cognito_user_pools
+  syncVehicles(filter: ModelVehicleFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelVehicleConnection @aws_iam @aws_cognito_user_pools
+  getInventory(id: ID!): Inventory @aws_api_key @aws_iam
+  listInventories(filter: ModelInventoryFilterInput, limit: Int, nextToken: String): ModelInventoryConnection @aws_api_key @aws_iam
+  syncInventories(filter: ModelInventoryFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelInventoryConnection @aws_api_key @aws_iam
+}
+
+input ModelCardsConditionInput {
+  cardNumber: ModelIntInput
+  fName: ModelStringInput
+  lName: ModelStringInput
+  expMonth: ModelIntInput
+  expYear: ModelIntInput
+  secCode: ModelIntInput
+  address: ModelStringInput
+  zip: ModelIntInput
+  city: ModelStringInput
+  country: ModelStringInput
+  state: ModelStringInput
+  and: [ModelCardsConditionInput]
+  or: [ModelCardsConditionInput]
+  not: ModelCardsConditionInput
+}
+
+input CreateCardsInput {
+  id: ID
+  cardNumber: Int
+  fName: String
+  lName: String
+  expMonth: Int
+  expYear: Int
+  secCode: Int
+  address: String
+  zip: Int
+  city: String
+  country: String
+  state: String
+  _version: Int
+}
+
+input UpdateCardsInput {
+  id: ID!
+  cardNumber: Int
+  fName: String
+  lName: String
+  expMonth: Int
+  expYear: Int
+  secCode: Int
+  address: String
+  zip: Int
+  city: String
+  country: String
+  state: String
+  _version: Int
+}
+
+input DeleteCardsInput {
+  id: ID!
+  _version: Int
+}
+
+type Mutation {
+  createCards(input: CreateCardsInput!, condition: ModelCardsConditionInput): Cards @aws_iam @aws_cognito_user_pools
+  updateCards(input: UpdateCardsInput!, condition: ModelCardsConditionInput): Cards @aws_iam @aws_cognito_user_pools
+  deleteCards(input: DeleteCardsInput!, condition: ModelCardsConditionInput): Cards @aws_iam @aws_cognito_user_pools
+  createHelpMemo(input: CreateHelpMemoInput!, condition: ModelHelpMemoConditionInput): HelpMemo @aws_iam @aws_cognito_user_pools
+  updateHelpMemo(input: UpdateHelpMemoInput!, condition: ModelHelpMemoConditionInput): HelpMemo @aws_iam @aws_cognito_user_pools
+  deleteHelpMemo(input: DeleteHelpMemoInput!, condition: ModelHelpMemoConditionInput): HelpMemo @aws_iam @aws_cognito_user_pools
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User @aws_iam @aws_cognito_user_pools
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User @aws_iam @aws_cognito_user_pools
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User @aws_iam @aws_cognito_user_pools
+  createVehicle(input: CreateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_iam @aws_cognito_user_pools
+  updateVehicle(input: UpdateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_iam @aws_cognito_user_pools
+  deleteVehicle(input: DeleteVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_iam @aws_cognito_user_pools
+  createInventory(input: CreateInventoryInput!, condition: ModelInventoryConditionInput): Inventory @aws_api_key @aws_iam
+  updateInventory(input: UpdateInventoryInput!, condition: ModelInventoryConditionInput): Inventory @aws_api_key @aws_iam
+  deleteInventory(input: DeleteInventoryInput!, condition: ModelInventoryConditionInput): Inventory @aws_api_key @aws_iam
+}
+
+input ModelSubscriptionCardsFilterInput {
+  id: ModelSubscriptionIDInput
+  cardNumber: ModelSubscriptionIntInput
+  fName: ModelSubscriptionStringInput
+  lName: ModelSubscriptionStringInput
+  expMonth: ModelSubscriptionIntInput
+  expYear: ModelSubscriptionIntInput
+  secCode: ModelSubscriptionIntInput
+  address: ModelSubscriptionStringInput
+  zip: ModelSubscriptionIntInput
+  city: ModelSubscriptionStringInput
+  country: ModelSubscriptionStringInput
+  state: ModelSubscriptionStringInput
+  and: [ModelSubscriptionCardsFilterInput]
+  or: [ModelSubscriptionCardsFilterInput]
+}
+
+type Subscription {
+  onCreateCards(filter: ModelSubscriptionCardsFilterInput, owner: String): Cards @aws_subscribe(mutations: ["createCards"]) @aws_iam @aws_cognito_user_pools
+  onUpdateCards(filter: ModelSubscriptionCardsFilterInput, owner: String): Cards @aws_subscribe(mutations: ["updateCards"]) @aws_iam @aws_cognito_user_pools
+  onDeleteCards(filter: ModelSubscriptionCardsFilterInput, owner: String): Cards @aws_subscribe(mutations: ["deleteCards"]) @aws_iam @aws_cognito_user_pools
+  onCreateHelpMemo(filter: ModelSubscriptionHelpMemoFilterInput, owner: String): HelpMemo @aws_subscribe(mutations: ["createHelpMemo"]) @aws_iam @aws_cognito_user_pools
+  onUpdateHelpMemo(filter: ModelSubscriptionHelpMemoFilterInput, owner: String): HelpMemo @aws_subscribe(mutations: ["updateHelpMemo"]) @aws_iam @aws_cognito_user_pools
+  onDeleteHelpMemo(filter: ModelSubscriptionHelpMemoFilterInput, owner: String): HelpMemo @aws_subscribe(mutations: ["deleteHelpMemo"]) @aws_iam @aws_cognito_user_pools
+  onCreateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["createUser"]) @aws_iam @aws_cognito_user_pools
+  onUpdateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["updateUser"]) @aws_iam @aws_cognito_user_pools
+  onDeleteUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["deleteUser"]) @aws_iam @aws_cognito_user_pools
+  onCreateVehicle(filter: ModelSubscriptionVehicleFilterInput, owner: String): Vehicle @aws_subscribe(mutations: ["createVehicle"]) @aws_iam @aws_cognito_user_pools
+  onUpdateVehicle(filter: ModelSubscriptionVehicleFilterInput, owner: String): Vehicle @aws_subscribe(mutations: ["updateVehicle"]) @aws_iam @aws_cognito_user_pools
+  onDeleteVehicle(filter: ModelSubscriptionVehicleFilterInput, owner: String): Vehicle @aws_subscribe(mutations: ["deleteVehicle"]) @aws_iam @aws_cognito_user_pools
+  onCreateInventory(filter: ModelSubscriptionInventoryFilterInput): Inventory @aws_subscribe(mutations: ["createInventory"]) @aws_api_key @aws_iam
+  onUpdateInventory(filter: ModelSubscriptionInventoryFilterInput): Inventory @aws_subscribe(mutations: ["updateInventory"]) @aws_api_key @aws_iam
+  onDeleteInventory(filter: ModelSubscriptionInventoryFilterInput): Inventory @aws_subscribe(mutations: ["deleteInventory"]) @aws_api_key @aws_iam
+}
+
+type ModelHelpMemoConnection @aws_iam @aws_cognito_user_pools {
   items: [HelpMemo]!
   nextToken: String
   startedAt: AWSTimestamp
@@ -248,29 +431,15 @@ input ModelHelpMemoFilterInput {
   type: ModelHelpTypesInput
   description: ModelStringInput
   createdAt: ModelStringInput
-  userID: ModelIDInput
   and: [ModelHelpMemoFilterInput]
   or: [ModelHelpMemoFilterInput]
   not: ModelHelpMemoFilterInput
-}
-
-type Query {
-  getHelpMemo(id: ID!): HelpMemo @aws_api_key @aws_iam
-  listHelpMemos(filter: ModelHelpMemoFilterInput, limit: Int, nextToken: String): ModelHelpMemoConnection @aws_api_key @aws_iam
-  syncHelpMemos(filter: ModelHelpMemoFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHelpMemoConnection @aws_api_key @aws_iam
-  getUser(id: ID!): User @aws_api_key @aws_iam @aws_cognito_user_pools
-  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection @aws_api_key @aws_iam @aws_cognito_user_pools
-  syncUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelUserConnection @aws_api_key @aws_iam @aws_cognito_user_pools
-  getVehicle(id: ID!): Vehicle @aws_api_key @aws_iam
-  listVehicles(filter: ModelVehicleFilterInput, limit: Int, nextToken: String): ModelVehicleConnection @aws_api_key @aws_iam
-  syncVehicles(filter: ModelVehicleFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelVehicleConnection @aws_api_key @aws_iam
 }
 
 input ModelHelpMemoConditionInput {
   type: ModelHelpTypesInput
   description: ModelStringInput
   createdAt: ModelStringInput
-  userID: ModelIDInput
   and: [ModelHelpMemoConditionInput]
   or: [ModelHelpMemoConditionInput]
   not: ModelHelpMemoConditionInput
@@ -279,9 +448,8 @@ input ModelHelpMemoConditionInput {
 input CreateHelpMemoInput {
   id: ID
   type: HelpTypes!
-  description: String!
-  createdAt: AWSDateTime
-  userID: ID!
+  description: String
+  createdAt: String
   _version: Int
 }
 
@@ -289,8 +457,7 @@ input UpdateHelpMemoInput {
   id: ID!
   type: HelpTypes
   description: String
-  createdAt: AWSDateTime
-  userID: ID
+  createdAt: String
   _version: Int
 }
 
@@ -299,49 +466,19 @@ input DeleteHelpMemoInput {
   _version: Int
 }
 
-type Mutation {
-  createHelpMemo(input: CreateHelpMemoInput!, condition: ModelHelpMemoConditionInput): HelpMemo @aws_api_key @aws_iam
-  updateHelpMemo(input: UpdateHelpMemoInput!, condition: ModelHelpMemoConditionInput): HelpMemo @aws_api_key @aws_iam
-  deleteHelpMemo(input: DeleteHelpMemoInput!, condition: ModelHelpMemoConditionInput): HelpMemo @aws_api_key @aws_iam
-  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User @aws_api_key @aws_iam @aws_cognito_user_pools
-  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User @aws_api_key @aws_iam @aws_cognito_user_pools
-  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User @aws_api_key @aws_iam @aws_cognito_user_pools
-  createVehicle(input: CreateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_api_key @aws_iam
-  updateVehicle(input: UpdateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_api_key @aws_iam
-  deleteVehicle(input: DeleteVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_api_key @aws_iam
-}
-
 input ModelSubscriptionHelpMemoFilterInput {
   id: ModelSubscriptionIDInput
   type: ModelSubscriptionStringInput
   description: ModelSubscriptionStringInput
   createdAt: ModelSubscriptionStringInput
-  userID: ModelSubscriptionIDInput
   and: [ModelSubscriptionHelpMemoFilterInput]
   or: [ModelSubscriptionHelpMemoFilterInput]
 }
 
-type Subscription {
-  onCreateHelpMemo(filter: ModelSubscriptionHelpMemoFilterInput): HelpMemo @aws_subscribe(mutations: ["createHelpMemo"]) @aws_api_key @aws_iam
-  onUpdateHelpMemo(filter: ModelSubscriptionHelpMemoFilterInput): HelpMemo @aws_subscribe(mutations: ["updateHelpMemo"]) @aws_api_key @aws_iam
-  onDeleteHelpMemo(filter: ModelSubscriptionHelpMemoFilterInput): HelpMemo @aws_subscribe(mutations: ["deleteHelpMemo"]) @aws_api_key @aws_iam
-  onCreateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["createUser"]) @aws_api_key @aws_iam @aws_cognito_user_pools
-  onUpdateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["updateUser"]) @aws_api_key @aws_iam @aws_cognito_user_pools
-  onDeleteUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["deleteUser"]) @aws_api_key @aws_iam @aws_cognito_user_pools
-  onCreateVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["createVehicle"]) @aws_api_key @aws_iam
-  onUpdateVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["updateVehicle"]) @aws_api_key @aws_iam
-  onDeleteVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["deleteVehicle"]) @aws_api_key @aws_iam
-}
-
-type ModelUserConnection @aws_api_key @aws_iam @aws_cognito_user_pools {
+type ModelUserConnection @aws_iam @aws_cognito_user_pools {
   items: [User]!
   nextToken: String
   startedAt: AWSTimestamp
-}
-
-input ModelMonthsInput {
-  eq: Months
-  ne: Months
 }
 
 input ModelUserFilterInput {
@@ -349,14 +486,15 @@ input ModelUserFilterInput {
   username: ModelStringInput
   firstName: ModelStringInput
   lastName: ModelStringInput
-  birthMonth: ModelMonthsInput
+  birthMonth: ModelStringInput
   birthDay: ModelStringInput
   birthYear: ModelStringInput
   phoneNumber: ModelStringInput
   houseNumber: ModelIntInput
   houseStreet: ModelStringInput
-  town: ModelStringInput
+  zip: ModelStringInput
   state: ModelStringInput
+  town: ModelStringInput
   country: ModelStringInput
   and: [ModelUserFilterInput]
   or: [ModelUserFilterInput]
@@ -367,14 +505,15 @@ input ModelUserConditionInput {
   username: ModelStringInput
   firstName: ModelStringInput
   lastName: ModelStringInput
-  birthMonth: ModelMonthsInput
+  birthMonth: ModelStringInput
   birthDay: ModelStringInput
   birthYear: ModelStringInput
   phoneNumber: ModelStringInput
   houseNumber: ModelIntInput
   houseStreet: ModelStringInput
-  town: ModelStringInput
+  zip: ModelStringInput
   state: ModelStringInput
+  town: ModelStringInput
   country: ModelStringInput
   and: [ModelUserConditionInput]
   or: [ModelUserConditionInput]
@@ -384,17 +523,18 @@ input ModelUserConditionInput {
 input CreateUserInput {
   id: ID
   username: String
-  firstName: String!
-  lastName: String!
-  birthMonth: Months
+  firstName: String
+  lastName: String
+  birthMonth: String
   birthDay: String
   birthYear: String
   phoneNumber: String
-  houseNumber: Int!
-  houseStreet: String!
-  town: String!
-  state: String!
-  country: String!
+  houseNumber: Int
+  houseStreet: String
+  zip: String
+  state: String
+  town: String
+  country: String
   _version: Int
 }
 
@@ -403,14 +543,15 @@ input UpdateUserInput {
   username: String
   firstName: String
   lastName: String
-  birthMonth: Months
+  birthMonth: String
   birthDay: String
   birthYear: String
   phoneNumber: String
   houseNumber: Int
   houseStreet: String
-  town: String
+  zip: String
   state: String
+  town: String
   country: String
   _version: Int
 }
@@ -431,44 +572,42 @@ input ModelSubscriptionUserFilterInput {
   phoneNumber: ModelSubscriptionStringInput
   houseNumber: ModelSubscriptionIntInput
   houseStreet: ModelSubscriptionStringInput
-  town: ModelSubscriptionStringInput
+  zip: ModelSubscriptionStringInput
   state: ModelSubscriptionStringInput
+  town: ModelSubscriptionStringInput
   country: ModelSubscriptionStringInput
   and: [ModelSubscriptionUserFilterInput]
   or: [ModelSubscriptionUserFilterInput]
 }
 
-type ModelVehicleConnection @aws_iam @aws_cognito_user_pools @aws_api_key {
+type ModelVehicleConnection @aws_iam @aws_cognito_user_pools {
   items: [Vehicle]!
   nextToken: String
   startedAt: AWSTimestamp
 }
 
-input ModelVehicleTypesInput {
-  eq: VehicleTypes
-  ne: VehicleTypes
-}
-
 input ModelVehicleFilterInput {
   id: ModelIDInput
-  Make: ModelStringInput
-  Model: ModelStringInput
-  isAvailable: ModelBooleanInput
+  make: ModelStringInput
+  model: ModelStringInput
   year: ModelIntInput
-  vehicleType: ModelVehicleTypesInput
-  userID: ModelIDInput
+  vehicleType: ModelStringInput
+  img: ModelStringInput
+  startTime: ModelStringInput
+  endTime: ModelStringInput
   and: [ModelVehicleFilterInput]
   or: [ModelVehicleFilterInput]
   not: ModelVehicleFilterInput
 }
 
 input ModelVehicleConditionInput {
-  Make: ModelStringInput
-  Model: ModelStringInput
-  isAvailable: ModelBooleanInput
+  make: ModelStringInput
+  model: ModelStringInput
   year: ModelIntInput
-  vehicleType: ModelVehicleTypesInput
-  userID: ModelIDInput
+  vehicleType: ModelStringInput
+  img: ModelStringInput
+  startTime: ModelStringInput
+  endTime: ModelStringInput
   and: [ModelVehicleConditionInput]
   or: [ModelVehicleConditionInput]
   not: ModelVehicleConditionInput
@@ -476,23 +615,25 @@ input ModelVehicleConditionInput {
 
 input CreateVehicleInput {
   id: ID
-  Make: String!
-  Model: String!
-  isAvailable: Boolean!
-  year: Int!
-  vehicleType: VehicleTypes
-  userID: ID!
+  make: String
+  model: String
+  year: Int
+  vehicleType: String
+  img: String
+  startTime: String
+  endTime: String
   _version: Int
 }
 
 input UpdateVehicleInput {
   id: ID!
-  Make: String
-  Model: String
-  isAvailable: Boolean
+  make: String
+  model: String
   year: Int
-  vehicleType: VehicleTypes
-  userID: ID
+  vehicleType: String
+  img: String
+  startTime: String
+  endTime: String
   _version: Int
 }
 
@@ -503,13 +644,84 @@ input DeleteVehicleInput {
 
 input ModelSubscriptionVehicleFilterInput {
   id: ModelSubscriptionIDInput
-  Make: ModelSubscriptionStringInput
-  Model: ModelSubscriptionStringInput
+  make: ModelSubscriptionStringInput
+  model: ModelSubscriptionStringInput
+  year: ModelSubscriptionIntInput
+  vehicleType: ModelSubscriptionStringInput
+  img: ModelSubscriptionStringInput
+  startTime: ModelSubscriptionStringInput
+  endTime: ModelSubscriptionStringInput
+  and: [ModelSubscriptionVehicleFilterInput]
+  or: [ModelSubscriptionVehicleFilterInput]
+}
+
+type ModelInventoryConnection @aws_api_key @aws_iam {
+  items: [Inventory]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelInventoryFilterInput {
+  id: ModelIDInput
+  make: ModelStringInput
+  model: ModelStringInput
+  isAvailable: ModelBooleanInput
+  year: ModelIntInput
+  vehicleType: ModelStringInput
+  img: ModelStringInput
+  and: [ModelInventoryFilterInput]
+  or: [ModelInventoryFilterInput]
+  not: ModelInventoryFilterInput
+}
+
+input ModelInventoryConditionInput {
+  make: ModelStringInput
+  model: ModelStringInput
+  isAvailable: ModelBooleanInput
+  year: ModelIntInput
+  vehicleType: ModelStringInput
+  img: ModelStringInput
+  and: [ModelInventoryConditionInput]
+  or: [ModelInventoryConditionInput]
+  not: ModelInventoryConditionInput
+}
+
+input CreateInventoryInput {
+  id: ID
+  make: String
+  model: String
+  isAvailable: Boolean
+  year: Int
+  vehicleType: String
+  img: String
+  _version: Int
+}
+
+input UpdateInventoryInput {
+  id: ID!
+  make: String
+  model: String
+  isAvailable: Boolean
+  year: Int
+  vehicleType: String
+  img: String
+  _version: Int
+}
+
+input DeleteInventoryInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionInventoryFilterInput {
+  id: ModelSubscriptionIDInput
+  make: ModelSubscriptionStringInput
+  model: ModelSubscriptionStringInput
   isAvailable: ModelSubscriptionBooleanInput
   year: ModelSubscriptionIntInput
   vehicleType: ModelSubscriptionStringInput
-  userID: ModelSubscriptionIDInput
-  and: [ModelSubscriptionVehicleFilterInput]
-  or: [ModelSubscriptionVehicleFilterInput]
+  img: ModelSubscriptionStringInput
+  and: [ModelSubscriptionInventoryFilterInput]
+  or: [ModelSubscriptionInventoryFilterInput]
 }
 

@@ -1,6 +1,6 @@
 {
   "identityPoolName": "testAuthIdentityPool",
-  "allowUnauthenticatedIdentities": false,
+  "allowUnauthenticatedIdentities": true,
   "resourceNameTruncated": "carsera69a2849",
   "userPoolName": "carservice",
   "autoVerifiedAttributes": [

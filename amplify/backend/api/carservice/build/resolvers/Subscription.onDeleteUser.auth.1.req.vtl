@@ -2,7 +2,7 @@
 $util.qr($ctx.stash.put("hasAuth", true))
 #set( $isAuthorized = false )
 #if( $util.authType() == "API Key Authorization" )
-  #set( $isAuthorized = true )
+
 #end
 #if( $util.authType() == "IAM Authorization" )
   #set( $adminRoles = ["us-east-1_oVc1hrAeU_Full-access/CognitoIdentityCredentials","us-east-1_oVc1hrAeU_Manage-only/CognitoIdentityCredentials"] )
@@ -14,7 +14,6 @@ $util.qr($ctx.stash.put("hasAuth", true))
 $util.unauthorized()
 #end
 #if( $util.authType() == "User Pool Authorization" )
-  #set( $isAuthorized = true )
   #set( $authRuntimeFilter = [] )
   #set( $authOwnerRuntimeFilter = [] )
   #set( $authGroupRuntimeFilter = [] )

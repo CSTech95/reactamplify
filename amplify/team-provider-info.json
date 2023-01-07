@@ -15,6 +15,12 @@
       "auth": {
         "carservice": {},
         "userPoolGroups": {}
+      },
+      "storage": {
+        "s3fileamplify": {}
+      },
+      "api": {
+        "carservice": {}
       }
     }
   }
