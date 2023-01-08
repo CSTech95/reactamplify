@@ -52,7 +52,7 @@ export async function getCards() {
 //}
 
 //Delete Card
-//export async function deleteCard() {
-//	const modelToDelete = await DataStore.query(Cards, 123456789);
-//	DataStore.delete(modelToDelete);
-//}
+export async function deleteCard() {
+	const modelToDelete = await DataStore.query(Cards, "cardID");
+	DataStore.delete(modelToDelete);
+}
