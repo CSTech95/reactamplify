@@ -53,8 +53,8 @@ export async function getUserDetails() {
 //	);
 //}
 
-// Delete User Details
-export async function deleteUserDetails() {
+// Delete User Detail
+export async function deleteUserDetail() {
 	const modelToDelete = await DataStore.query(User, "123456789");
 	DataStore.delete(modelToDelete);
 }
