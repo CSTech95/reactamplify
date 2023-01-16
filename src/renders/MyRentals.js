@@ -24,6 +24,7 @@ function MyRentals() {
 	}, []);
 	return (
 		<View style={styles.container}>
+			<Text>You have {rentals.length} rentals</Text>
 			{/*<View style={styles.centeredView}>
 				<View style={styles.modalView}>*/}
 			{/*{console.log(rentals)}*/}

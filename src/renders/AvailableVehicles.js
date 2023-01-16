@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Alert, FlatList, Modal, Pressable, StyleSheet, Text, TextInput, View, Platform, Image } from "react-native";
 import { DataStore } from "@aws-amplify/datastore";
-import { Inventory } from "../models/";
+import { Inventory, Vehicle } from "../models/";
 
 function AvailableVehicles() {
 	const [inventory, setInventory] = useState([]);
@@ -10,8 +10,24 @@ function AvailableVehicles() {
 
 	async function getInventory() {
 		const models = await DataStore.query(Inventory);
-		console.log(models);
+		//console.log(models);
 		setInventory(models);
+	}
+
+	async function createRental() {
+		console.log(modalData);
+		await DataStore.save(
+			new Vehicle({
+				make: modalData[0].make,
+				model: modalData[0].model,
+				year: modalData[0].year,
+				vehicleType: modalData[0].vehicleType,
+				img: modalData[0].img,
+				startTime: "1/15/2023",
+				endTime: "1/30/2023",
+			})
+		);
+		console.log("Rental has been created");
 	}
 
 	useEffect(() => {
@@ -37,7 +53,7 @@ function AvailableVehicles() {
 							onPress={() => {
 								setModalData(inventory);
 								setModalVisible(true);
-								console.log(modalData);
+								//console.log(modalData);
 							}}
 						>
 							<Text style={styles.textStyle}>Show Info</Text>
@@ -72,6 +88,10 @@ function AvailableVehicles() {
 							<View style={{ paddingTop: 15 }}>
 								<Pressable style={[styles.button, styles.buttonClose]} onPress={() => setModalVisible(!modalVisible)}>
 									<Text style={styles.textStyle}>Close</Text>
+								</Pressable>
+								{/*Check if vehicle is available 1st in function*/}
+								<Pressable style={[styles.button, styles.buttonClose]} onPress={createRental}>
+									<Text style={styles.textStyle}>Rent</Text>
 								</Pressable>
 							</View>
 						</View>

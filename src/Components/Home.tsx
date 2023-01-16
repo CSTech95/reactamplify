@@ -14,7 +14,9 @@ export default class Home extends React.Component {
 				<MyHeader my_page="true" menu="true" navigation={this.props.navigation} />
 				<Image style={styles.bg} source={require("../../assets/img/home_bg.jpg")} />
 				<MyRentals />
-				<Text>Separator</Text>
+				{/*<View style={styles.titlecontainer}>*/}
+				<Text>Rent a Vehicle down below</Text>
+				{/*</View>*/}
 				<AvailableVehicles />
 			</View>
 		);
@@ -37,4 +39,5 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: 300,
 	},
+	titlecontainer: { textAlign: "center" },
 });
