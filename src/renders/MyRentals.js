@@ -66,9 +66,10 @@ function MyRentals() {
 									<Image style={styles.imgContainer} source={modalData.img} />
 								</View>
 								<View style={styles.modalTextContainer}>
+									<Text>Year: {modalData.year}</Text>
 									<Text>Make: {modalData.make}</Text>
 									<Text>Model: {modalData.model}</Text>
-									<Text>Year: {modalData.year}</Text>
+									<Text>Type: {modalData.vehicleType}</Text>
 									<Text>{`Start Time: ${modalData.startTime} `}</Text>
 									<Text>{`End Time: ${modalData.endTime} `}</Text>
 								</View>
