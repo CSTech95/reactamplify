@@ -173,7 +173,7 @@
             "Ref": "UnauthRoleName"
           },
           "S3DeploymentBucket": "amplify-carservice-staging-155413-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/ccb705c7b2b208f69d3eb94f2b4515f02e292d98",
+          "S3DeploymentRootKey": "amplify-appsync-files/1f2339ba9e1aeb51672691fe5dd2ee1c9a6520ff",
           "env": "staging"
         }
       }

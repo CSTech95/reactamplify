@@ -101,7 +101,7 @@ type Vehicle @aws_iam @aws_cognito_user_pools {
   owner: String
 }
 
-type Inventory @aws_api_key @aws_iam {
+type Inventory @aws_api_key @aws_iam @aws_cognito_user_pools {
   id: ID!
   make: String
   model: String
@@ -303,9 +303,9 @@ type Query {
   getVehicle(id: ID!): Vehicle @aws_iam @aws_cognito_user_pools
   listVehicles(filter: ModelVehicleFilterInput, limit: Int, nextToken: String): ModelVehicleConnection @aws_iam @aws_cognito_user_pools
   syncVehicles(filter: ModelVehicleFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelVehicleConnection @aws_iam @aws_cognito_user_pools
-  getInventory(id: ID!): Inventory @aws_api_key @aws_iam
-  listInventories(filter: ModelInventoryFilterInput, limit: Int, nextToken: String): ModelInventoryConnection @aws_api_key @aws_iam
-  syncInventories(filter: ModelInventoryFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelInventoryConnection @aws_api_key @aws_iam
+  getInventory(id: ID!): Inventory @aws_api_key @aws_iam @aws_cognito_user_pools
+  listInventories(filter: ModelInventoryFilterInput, limit: Int, nextToken: String): ModelInventoryConnection @aws_api_key @aws_iam @aws_cognito_user_pools
+  syncInventories(filter: ModelInventoryFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelInventoryConnection @aws_api_key @aws_iam @aws_cognito_user_pools
 }
 
 input ModelCardsConditionInput {
@@ -375,9 +375,9 @@ type Mutation {
   createVehicle(input: CreateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_iam @aws_cognito_user_pools
   updateVehicle(input: UpdateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_iam @aws_cognito_user_pools
   deleteVehicle(input: DeleteVehicleInput!, condition: ModelVehicleConditionInput): Vehicle @aws_iam @aws_cognito_user_pools
-  createInventory(input: CreateInventoryInput!, condition: ModelInventoryConditionInput): Inventory @aws_api_key @aws_iam
-  updateInventory(input: UpdateInventoryInput!, condition: ModelInventoryConditionInput): Inventory @aws_api_key @aws_iam
-  deleteInventory(input: DeleteInventoryInput!, condition: ModelInventoryConditionInput): Inventory @aws_api_key @aws_iam
+  createInventory(input: CreateInventoryInput!, condition: ModelInventoryConditionInput): Inventory @aws_api_key @aws_iam @aws_cognito_user_pools
+  updateInventory(input: UpdateInventoryInput!, condition: ModelInventoryConditionInput): Inventory @aws_api_key @aws_iam @aws_cognito_user_pools
+  deleteInventory(input: DeleteInventoryInput!, condition: ModelInventoryConditionInput): Inventory @aws_api_key @aws_iam @aws_cognito_user_pools
 }
 
 input ModelSubscriptionCardsFilterInput {
@@ -410,9 +410,9 @@ type Subscription {
   onCreateVehicle(filter: ModelSubscriptionVehicleFilterInput, owner: String): Vehicle @aws_subscribe(mutations: ["createVehicle"]) @aws_iam @aws_cognito_user_pools
   onUpdateVehicle(filter: ModelSubscriptionVehicleFilterInput, owner: String): Vehicle @aws_subscribe(mutations: ["updateVehicle"]) @aws_iam @aws_cognito_user_pools
   onDeleteVehicle(filter: ModelSubscriptionVehicleFilterInput, owner: String): Vehicle @aws_subscribe(mutations: ["deleteVehicle"]) @aws_iam @aws_cognito_user_pools
-  onCreateInventory(filter: ModelSubscriptionInventoryFilterInput): Inventory @aws_subscribe(mutations: ["createInventory"]) @aws_api_key @aws_iam
-  onUpdateInventory(filter: ModelSubscriptionInventoryFilterInput): Inventory @aws_subscribe(mutations: ["updateInventory"]) @aws_api_key @aws_iam
-  onDeleteInventory(filter: ModelSubscriptionInventoryFilterInput): Inventory @aws_subscribe(mutations: ["deleteInventory"]) @aws_api_key @aws_iam
+  onCreateInventory(filter: ModelSubscriptionInventoryFilterInput): Inventory @aws_subscribe(mutations: ["createInventory"]) @aws_api_key @aws_iam @aws_cognito_user_pools
+  onUpdateInventory(filter: ModelSubscriptionInventoryFilterInput): Inventory @aws_subscribe(mutations: ["updateInventory"]) @aws_api_key @aws_iam @aws_cognito_user_pools
+  onDeleteInventory(filter: ModelSubscriptionInventoryFilterInput): Inventory @aws_subscribe(mutations: ["deleteInventory"]) @aws_api_key @aws_iam @aws_cognito_user_pools
 }
 
 type ModelHelpMemoConnection @aws_iam @aws_cognito_user_pools {
@@ -655,7 +655,7 @@ input ModelSubscriptionVehicleFilterInput {
   or: [ModelSubscriptionVehicleFilterInput]
 }
 
-type ModelInventoryConnection @aws_api_key @aws_iam {
+type ModelInventoryConnection @aws_api_key @aws_iam @aws_cognito_user_pools {
   items: [Inventory]!
   nextToken: String
   startedAt: AWSTimestamp
