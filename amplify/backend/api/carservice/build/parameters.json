@@ -10,5 +10,5 @@
     },
     "AuthModeLastUpdated": "2022-11-12T23:33:40.403Z",
     "S3DeploymentBucket": "amplify-carservice-staging-155413-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/1f2339ba9e1aeb51672691fe5dd2ee1c9a6520ff"
+    "S3DeploymentRootKey": "amplify-appsync-files/9600e1d595ff80c33e460c255fc6ced48c2ed2ea"
 }

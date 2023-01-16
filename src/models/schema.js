@@ -219,22 +219,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "firstName": {
-                    "name": "firstName",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "lastName": {
-                    "name": "lastName",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "birthMonth": {
-                    "name": "birthMonth",
+                "name": {
+                    "name": "name",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -242,13 +228,6 @@ export const schema = {
                 },
                 "birthDay": {
                     "name": "birthDay",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "birthYear": {
-                    "name": "birthYear",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -264,7 +243,7 @@ export const schema = {
                 "houseNumber": {
                     "name": "houseNumber",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -604,5 +583,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.4",
-    "version": "ce56e30589ec99424714d4d8725b9621"
+    "version": "2cd517f7473fc82c5067c60c5b376d4f"
 };

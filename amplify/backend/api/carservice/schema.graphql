@@ -52,13 +52,10 @@ enum Months {
 type User @model @auth(rules: [{allow: owner}]) {
   id: ID!
   username: String
-  firstName: String
-  lastName: String
-  birthMonth: String
+  name: String
   birthDay: String
-  birthYear: String
   phoneNumber: String
-  houseNumber: Int
+  houseNumber: String
   houseStreet: String
   zip: String
   state: String

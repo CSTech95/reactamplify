@@ -5,13 +5,10 @@ import { User } from "../models/";
 // Create User profile Info
 export async function addProfile() {
 	const [username, setUserName] = useState(""); //email
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [birthMonth, setBirthMonth] = useState("");
+	const [name, setName] = useState("");
 	const [birthDay, setBirthDay] = useState("");
-	const [birthYear, setBirthYear] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
-	const [houseNumber, setHouseNumber] = useState();
+	const [houseNumber, setHouseNumber] = useState("");
 	const [houseStreet, setHouseStreet] = useState("");
 	const [zip, setZip] = useState("");
 	const [state, setState] = useState("");
@@ -21,10 +18,8 @@ export async function addProfile() {
 	await DataStore.save(
 		new User({
 			username,
-			firstName,
-			lastName: birthMonth,
+			name,
 			birthDay,
-			birthYear,
 			phoneNumber,
 			houseNumber,
 			houseStreet,
@@ -39,7 +34,7 @@ export async function addProfile() {
 // Get User Detail Info
 export async function getUserDetails() {
 	const models = await DataStore.query(User);
-	console.log("user models")
+	console.log("user models");
 	console.log(models[0]);
 }
 

@@ -64,13 +64,10 @@ enum Months {
 type User @aws_iam @aws_cognito_user_pools {
   id: ID!
   username: String
-  firstName: String
-  lastName: String
-  birthMonth: String
+  name: String
   birthDay: String
-  birthYear: String
   phoneNumber: String
-  houseNumber: Int
+  houseNumber: String
   houseStreet: String
   zip: String
   state: String
@@ -484,13 +481,10 @@ type ModelUserConnection @aws_iam @aws_cognito_user_pools {
 input ModelUserFilterInput {
   id: ModelIDInput
   username: ModelStringInput
-  firstName: ModelStringInput
-  lastName: ModelStringInput
-  birthMonth: ModelStringInput
+  name: ModelStringInput
   birthDay: ModelStringInput
-  birthYear: ModelStringInput
   phoneNumber: ModelStringInput
-  houseNumber: ModelIntInput
+  houseNumber: ModelStringInput
   houseStreet: ModelStringInput
   zip: ModelStringInput
   state: ModelStringInput
@@ -503,13 +497,10 @@ input ModelUserFilterInput {
 
 input ModelUserConditionInput {
   username: ModelStringInput
-  firstName: ModelStringInput
-  lastName: ModelStringInput
-  birthMonth: ModelStringInput
+  name: ModelStringInput
   birthDay: ModelStringInput
-  birthYear: ModelStringInput
   phoneNumber: ModelStringInput
-  houseNumber: ModelIntInput
+  houseNumber: ModelStringInput
   houseStreet: ModelStringInput
   zip: ModelStringInput
   state: ModelStringInput
@@ -523,13 +514,10 @@ input ModelUserConditionInput {
 input CreateUserInput {
   id: ID
   username: String
-  firstName: String
-  lastName: String
-  birthMonth: String
+  name: String
   birthDay: String
-  birthYear: String
   phoneNumber: String
-  houseNumber: Int
+  houseNumber: String
   houseStreet: String
   zip: String
   state: String
@@ -541,13 +529,10 @@ input CreateUserInput {
 input UpdateUserInput {
   id: ID!
   username: String
-  firstName: String
-  lastName: String
-  birthMonth: String
+  name: String
   birthDay: String
-  birthYear: String
   phoneNumber: String
-  houseNumber: Int
+  houseNumber: String
   houseStreet: String
   zip: String
   state: String
@@ -564,13 +549,10 @@ input DeleteUserInput {
 input ModelSubscriptionUserFilterInput {
   id: ModelSubscriptionIDInput
   username: ModelSubscriptionStringInput
-  firstName: ModelSubscriptionStringInput
-  lastName: ModelSubscriptionStringInput
-  birthMonth: ModelSubscriptionStringInput
+  name: ModelSubscriptionStringInput
   birthDay: ModelSubscriptionStringInput
-  birthYear: ModelSubscriptionStringInput
   phoneNumber: ModelSubscriptionStringInput
-  houseNumber: ModelSubscriptionIntInput
+  houseNumber: ModelSubscriptionStringInput
   houseStreet: ModelSubscriptionStringInput
   zip: ModelSubscriptionStringInput
   state: ModelSubscriptionStringInput

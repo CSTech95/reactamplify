@@ -116,13 +116,10 @@ export declare const HelpMemo: (new (init: ModelInit<HelpMemo, HelpMemoMetaData>
 type EagerUser = {
   readonly id: string;
   readonly username?: string | null;
-  readonly firstName?: string | null;
-  readonly lastName?: string | null;
-  readonly birthMonth?: string | null;
+  readonly name?: string | null;
   readonly birthDay?: string | null;
-  readonly birthYear?: string | null;
   readonly phoneNumber?: string | null;
-  readonly houseNumber?: number | null;
+  readonly houseNumber?: string | null;
   readonly houseStreet?: string | null;
   readonly zip?: string | null;
   readonly state?: string | null;
@@ -135,13 +132,10 @@ type EagerUser = {
 type LazyUser = {
   readonly id: string;
   readonly username?: string | null;
-  readonly firstName?: string | null;
-  readonly lastName?: string | null;
-  readonly birthMonth?: string | null;
+  readonly name?: string | null;
   readonly birthDay?: string | null;
-  readonly birthYear?: string | null;
   readonly phoneNumber?: string | null;
-  readonly houseNumber?: number | null;
+  readonly houseNumber?: string | null;
   readonly houseStreet?: string | null;
   readonly zip?: string | null;
   readonly state?: string | null;
