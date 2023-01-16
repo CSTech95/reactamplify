@@ -4,7 +4,7 @@ import { User } from "../models/";
 
 // Create User profile Info
 export async function addProfile() {
-	const [username, setUserName] = useState("");
+	const [username, setUserName] = useState(""); //email
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [birthMonth, setBirthMonth] = useState("");
@@ -39,7 +39,8 @@ export async function addProfile() {
 // Get User Detail Info
 export async function getUserDetails() {
 	const models = await DataStore.query(User);
-	console.log(models);
+	console.log("user models")
+	console.log(models[0]);
 }
 
 // Update User details

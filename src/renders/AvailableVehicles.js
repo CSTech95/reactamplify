@@ -44,10 +44,11 @@ function AvailableVehicles() {
 			{/*{console.log(inventory)}*/}
 			{inventory.map((vehicle) => (
 				<View key={vehicle.id} style={styles.card}>
-					<Text>{vehicle.year}</Text>
-					<Text>{`${vehicle.make} ${vehicle.model}`}</Text>
 					<Image style={styles.imgContainer} source={vehicle.img} />
-					<View style={{ paddingTop: 5 }}>
+					<Text style={styles.year}>{vehicle.year}</Text>
+					<Text style={styles.model_txt}>{`${vehicle.make} ${vehicle.model}`}</Text>
+
+					{/* <View style={{ paddingTop: 5 }}>
 						<Pressable
 							style={[styles.button, styles.buttonOpen]}
 							onPress={() => {
@@ -58,7 +59,7 @@ function AvailableVehicles() {
 						>
 							<Text style={styles.textStyle}>Show Info</Text>
 						</Pressable>
-					</View>
+					</View> */}
 				</View>
 			))}
 			{/*</View>
@@ -152,22 +153,34 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 	},
 	card: {
-		textAlign: "center",
-		padding: 30,
+		borderColor: "#E5E5E5",
+		borderWidth: 1,
+		margin: 15,
+		flexDirection: 'column'
 	},
 	container: {
 		marginHorizontal: "auto",
 		//width: 100,
 		flexDirection: "row",
 		flexWrap: "wrap",
-		justifyContent: "center",
 	},
 	imgContainer: {
 		//flex: 1,
-		width: 100,
+		width: 150,
 		height: 100,
-		padding: 25,
+		backgroundColor: "#F5F4F4"
+	}, year: {
+		color: "#939393",
+		fontSize: 10,
+		marginTop: 10,
+		marginLeft: 12,
 	},
+	model_txt: {
+		fontSize: 14,
+		paddingLeft: 12,
+		marginTop: 5,
+		marginBottom: 12
+	}
 });
 
 export default AvailableVehicles;

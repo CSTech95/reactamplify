@@ -6,6 +6,7 @@ import AdBlock from "../../ui/AdBlock";
 import MyButton from "../../ui/MyButton";
 import { Auth } from 'aws-amplify';
 import SubHeader from "../../ui/SubHeader";
+import { getUserDetails, deleteUserDetail, addProfile } from "../../endpoints/API_User";
 
 export default class MyProfile extends React.Component {
 
@@ -27,6 +28,9 @@ export default class MyProfile extends React.Component {
     async getAttributes() {
         const user = await Auth.currentAuthenticatedUser();
         console.log('attributes:', user.attributes);
+        const detailes = getUserDetails();
+        console.log("details")
+        console.log(detailes)
 
         this.setState({
             name: user.attributes['name'],
@@ -43,6 +47,8 @@ export default class MyProfile extends React.Component {
 
     SaveChanges = () => {
         //HERE IS WHERE YOU NEED TO WORK ON
+        deleteUserDetail();
+        addProfile()
 
         //WHEN EVERYTHING IS COMPLETED
         this.props.navigation.goBack(null)
