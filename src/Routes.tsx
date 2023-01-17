@@ -10,6 +10,8 @@ import HelpRequests from "./components/MyPage/HelpRequests";
 import MyProfile from "./components/MyPage/MyProfile";
 import PaymentMethods from "./components/MyPage/PaymentMethods";
 import RequestNewHelp from "./components/MyPage/RequestNewHelp";
+import VehicleInfo from "./components/VehicleInfo";
+
 
 const Stack = createStackNavigator()
 
@@ -28,6 +30,7 @@ export default class Routes extends React.Component {
                     <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
                     <Stack.Screen name="PaymentMethods" component={PaymentMethods} options={{ headerShown: false }} />
                     <Stack.Screen name="RequestNewHelp" component={RequestNewHelp} options={{ headerShown: false }} />
+                    <Stack.Screen name="VehicleInfo" component={VehicleInfo} options={{ headerShown: false }} />
 
                     
                 </Stack.Navigator>

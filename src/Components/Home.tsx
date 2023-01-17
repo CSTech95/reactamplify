@@ -7,12 +7,17 @@ import SelectDropdown from 'react-native-select-dropdown'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import MyButton from "../ui/MyButton";
+import VehicleItem from "../ui/VehicleItem";
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import { Inventory, Vehicle } from "../models";
+import { DataStore } from "@aws-amplify/datastore";
+import VehicleInfo from "./VehicleInfo";
 //import { Inventory } from "../models";
 
 //import { DataStore } from "aws-amplify";
 //import { Vehicle } from "../models/";
 export default class Home extends React.Component {
+
 
 	constructor(props) {
 		super(props)
@@ -21,7 +26,22 @@ export default class Home extends React.Component {
 			show_dropoff: false,
 			pickup_date: 'Pick Up Date',
 			dropoff_date: 'Drop Off Date',
+			pickup_loc: 'Pick Up Location',
+			dropoff_loc: 'Drop Off Location',
+			inventories: []
 		}
+	}
+
+	componentDidMount() {
+
+		this.getInventory();
+	}
+
+	async getInventory() {
+		const models = await DataStore.query(Inventory);
+		this.setState({
+			inventories: models
+		})
 	}
 
 	showPickUp = () => {
@@ -57,6 +77,12 @@ export default class Home extends React.Component {
 		console.warn("A date has been picked: ", date);
 		this.hideDatePicker();
 	};
+
+	vehicleInfo = (key) => {
+		this.props.navigation.navigate('VehicleInfo', {
+			key: key
+		})
+	}
 
 	render() {
 		const countries = ["Bridgeport", "Stratford", "Milford"]
@@ -160,8 +186,29 @@ export default class Home extends React.Component {
 								onPress={this.signInCall} />
 						</View>
 					</View>
+					<View style={styles.v_box}>
+						{this.state.inventories.map(
+							(vehicle) => {
+								return (
+									<VehicleItem
+										key={vehicle.id}
+										onPress={() => this.props.navigation.navigate('VehicleInfo', {
+											key: vehicle.id
+										})}
+										img={vehicle.img}
+										year={vehicle.year}
+										model={vehicle.model}
+									/>
+								)
+							}
+						)}
+					</View>
 				</View>
-				<AvailableVehicles styles={styles.avail} />
+
+				{/* <AvailableVehicles
+					navigation={this.props.navigation}
+					styles={styles.avail}
+				/> */}
 
 				{/* <MyRentals /> */}
 				{/*<View style={styles.titlecontainer}>*/}
@@ -237,5 +284,10 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
 		justifyContent: 'center',
 		alignItems: 'center',
+	}, v_box:{
+		flexDirection: 'row',
+		width: '100%',
+		flexWrap: 'wrap',
+		marginHorizontal: 'auto'
 	}
 });

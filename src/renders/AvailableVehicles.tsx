@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Alert, FlatList, Modal, Pressable, StyleSheet, Text, TextInput, View, Platform, Image } from "react-native";
 import { DataStore } from "@aws-amplify/datastore";
-import { Inventory, Vehicle } from "../models/";
+import { Inventory, Vehicle } from "../models";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import VehicleInfo from "../components/VehicleInfo";
 
 function AvailableVehicles() {
 	const [inventory, setInventory] = useState([]);
@@ -30,6 +32,12 @@ function AvailableVehicles() {
 		console.log("Rental has been created");
 	}
 
+	function vehicleInfo(key){
+		this.props.navigation.navigate('VehicleInfo', {
+			key: key
+		})
+	}
+
 	useEffect(() => {
 		getInventory();
 
@@ -43,7 +51,11 @@ function AvailableVehicles() {
 				<View style={styles.modalView}>*/}
 			{/*{console.log(inventory)}*/}
 			{inventory.map((vehicle) => (
-				<View key={vehicle.id} style={styles.card}>
+				<Pressable
+					key={vehicle.id}
+					style={styles.card}
+					onPress={() => vehicleInfo(vehicle.id)}
+					>
 					<Image style={styles.imgContainer} source={vehicle.img} />
 					<Text style={styles.year}>{vehicle.year}</Text>
 					<Text style={styles.model_txt}>{`${vehicle.make} ${vehicle.model}`}</Text>
@@ -60,7 +72,7 @@ function AvailableVehicles() {
 							<Text style={styles.textStyle}>Show Info</Text>
 						</Pressable>
 					</View> */}
-				</View>
+				</Pressable>
 			))}
 			{/*</View>
 			</View>*/}
