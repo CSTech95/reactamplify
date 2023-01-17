@@ -1,5 +1,5 @@
 import React from "react"
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
 import MyHeader from '../ui/MyHeader';
 import MainTextInput from '../ui/MainTextInput';
 import AdBlock from "../ui/AdBlock";
@@ -7,14 +7,33 @@ import MyButton from "../ui/MyButton";
 import { Auth } from 'aws-amplify';
 import SubHeader from "../ui/SubHeader";
 import SimpleButton from "../ui/SimpleButton";
+import { DataStore } from "@aws-amplify/datastore";
+import SelectDropdown from "react-native-select-dropdown";
+import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 
 export default class VehicleInfo extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            img: this.props.route.params.img,
+            year: this.props.route.params.year,
+            model_txt: this.props.route.params.model_txt,
+            model: this.props.route.params.model,
+            make: this.props.route.params.make,
+            type: this.props.route.params.type,
+            show_pickup: false,
+            show_dropoff: false,
+            pickup_date: this.props.route.params.pickup_date,
+            dropoff_date: this.props.route.params.dropoff_date,
+            pickup_loc: this.props.route.params.pickup_loc,
+            dropoff_loc: this.props.route.params.dropoff_loc
+        }
     }
 
+
     render() {
+        const countries = ["Bridgeport", "Stratford", "Milford"];
         return (
 
             <View style={styles.container}>
@@ -31,7 +50,108 @@ export default class VehicleInfo extends React.Component {
                                 title="Vehicle Info"
                             />
                             <Image style={styles.img}
+                                source={this.state.img}
+                            />
+                            <Text style={styles.model_txt}>{this.state.model_txt}</Text>
+
+                            <Text style={styles.des}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut ero labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut ero labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut ero labore et dolore magna aliqua.</Text>
+                            <View style={styles.g_box}>
+                                <Text style={styles.txt}>Year : {this.state.year}</Text>
+                                <Text style={styles.txt}>Make : {this.state.make}</Text>
+                                <Text style={styles.txt}>Model : {this.state.model}</Text>
+                                <Text style={styles.txt}>Type : {this.state.type}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.contents}>
+                            <View style={styles.box}>
+                                <SelectDropdown
+                                    defaultButtonText="Pick Up Location"
+                                    buttonStyle={styles.drop}
+                                    buttonTextStyle={styles.drop_txt}
+                                    data={countries}
+                                    onSelect={(selectedItem, index) => {
+                                        console.log(selectedItem, index);
+                                    }}
+                                    buttonTextAfterSelection={(selectedItem, index) => {
+                                        // text represented after item is selected
+                                        // if data array is an array of objects then return selectedItem.property to render after item is selected
+                                        return selectedItem;
+                                    }}
+                                    rowTextForSelection={(item, index) => {
+                                        // text represented for each item in dropdown
+                                        // if data array is an array of objects then return item.property to represent item in dropdown
+                                        return item;
+                                    }}
                                 />
+                                <SelectDropdown
+                                    defaultButtonText="Drop Off Location"
+                                    buttonStyle={styles.drop}
+                                    buttonTextStyle={styles.drop_txt}
+                                    data={countries}
+                                    onSelect={(selectedItem, index) => {
+                                        console.log(selectedItem, index);
+                                    }}
+                                    buttonTextAfterSelection={(selectedItem, index) => {
+                                        // text represented after item is selected
+                                        // if data array is an array of objects then return selectedItem.property to render after item is selected
+                                        return selectedItem;
+                                    }}
+                                    rowTextForSelection={(item, index) => {
+                                        // text represented for each item in dropdown
+                                        // if data array is an array of objects then return item.property to represent item in dropdown
+                                        return item;
+                                    }}
+                                />
+                            </View>
+                            <View style={styles.box}>
+                                <TouchableOpacity style={styles.drop} onPress={this.showPickUp}>
+                                    <Text style={styles.drop_txt}>{this.state.pickup_date}</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity style={styles.drop} onPress={this.showDropOff}>
+                                    <Text style={styles.drop_txt}>{this.state.dropoff_date}</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                            {this.state.show_pickup && (
+                                <DatePicker
+                                    options={{
+                                        backgroundColor: "#090C08",
+                                        textHeaderColor: "#FFA25B",
+                                        textDefaultColor: "#F6E7C1",
+                                        selectedTextColor: "#fff",
+                                        mainColor: "#F4722B",
+                                        textSecondaryColor: "#D6C7A1",
+                                        borderColor: "rgba(122, 146, 165, 0.1)",
+                                    }}
+                                    mode="calendar"
+                                    style={{ borderRadius: 10, maxWidth: 300 }}
+                                    selected={getFormatedDate(new Date(), "jYYYY/jMM/jDD")}
+                                    onDateChange={this.pickUpDateChanged}
+                                />
+                            )}
+                            {this.state.show_dropoff && (
+                                <DatePicker
+                                    options={{
+                                        backgroundColor: "#090C08",
+                                        textHeaderColor: "#FFA25B",
+                                        textDefaultColor: "#F6E7C1",
+                                        selectedTextColor: "#fff",
+                                        mainColor: "#F4722B",
+                                        textSecondaryColor: "#D6C7A1",
+                                        borderColor: "rgba(122, 146, 165, 0.1)",
+                                    }}
+                                    mode="calendar"
+                                    style={{ borderRadius: 10, maxWidth: 300 }}
+                                    selected={getFormatedDate(new Date(), "jYYYY/jMM/jDD")}
+                                    onDateChange={this.dropOffDateChanged}
+                                />
+                            )}
+                            <View style={styles.half_box}>
+                                <View style={styles.sign_box}>
+                                    <MyButton style={styles.btn} title="RENT THIS VEHICLE" color="#06A500" titleColor="#ffffff" onPress={() => console.log("clicked")} />
+                                </View>
+                            </View>
                         </View>
                     </View>
 
@@ -96,7 +216,62 @@ const styles = StyleSheet.create({
         maxWidth: 350,
         maxHeight: 221,
         backgroundColor: "#F5F4F4",
-        width: '100%',
-        height: '100%',
-    }
+        width: 380,
+        height: 221,
+    }, model_txt: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginTop: 15,
+    }, des: {
+        fontSize: 14,
+        marginTop: 15,
+    }, g_box: {
+        backgroundColor: '#F5F4F4',
+        padding: 12,
+        marginTop: 15,
+        marginBottom: 15,
+    }, txt: {
+        fontSize: 12,
+        color: '#939393'
+
+    }, drop: {
+        backgroundColor: "#ffffff",
+        flexDirection: "row",
+        height: 52,
+        paddingStart: 12,
+        width: 190,
+        paddingEnd: 8,
+        marginHorizontal: 9,
+        justifyContent: "center",
+        borderColor: "#E5E5E5",
+        borderWidth: 1,
+        alignItems: "center",
+    },
+    drop_txt: {
+        fontSize: 14,
+        alignSelf: "center",
+    },
+    titlecontainer: {
+        textAlign: "center",
+    },
+    btn: {
+        width: 350,
+        flex: 1,
+    },
+    avail: {
+        marginRight: 24,
+        marginLeft: 24,
+        alignSelf: "center",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    v_box: {
+        flexDirection: "row",
+        width: "100%",
+        flexWrap: "wrap",
+        marginHorizontal: "auto",
+    }, box: {
+        flexDirection: "row",
+        marginVertical: 5,
+    },
 });

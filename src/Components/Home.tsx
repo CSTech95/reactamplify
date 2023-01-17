@@ -181,17 +181,28 @@ export default class Home extends React.Component {
 					</View>
 					<View style={styles.v_box}>
 						{this.state.inventories.map((vehicle) => {
+							console.log(vehicle)
 							return (
 								<VehicleItem
 									key={vehicle.id}
 									onPress={() =>
 										this.props.navigation.navigate("VehicleInfo", {
 											key: vehicle.id,
+											img: vehicle.img,
+											year: vehicle.year,
+											model_txt: vehicle.make + " " + vehicle.model,
+											model: vehicle.model,
+											make: vehicle.make,
+											type: vehicle.vehicleType,
+											pickup_date: this.state.pickup_date,
+											dropoff_date: this.state.dropoff_date,
+											pickup_loc: this.state.pickup_loc,
+											dropoff_loc: this.state.dropoff_loc
 										})
 									}
 									img={vehicle.img}
 									year={vehicle.year}
-									model={vehicle.make+ " "+vehicle.model}
+									model={vehicle.make + " " + vehicle.model}
 								/>
 							);
 						})}
