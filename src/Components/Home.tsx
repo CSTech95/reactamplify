@@ -154,7 +154,7 @@ export default class Home extends React.Component {
 								borderColor: 'rgba(122, 146, 165, 0.1)',
 							}}
 							mode="calendar"
-							style={{ borderRadius: 10 }}
+							style={{ borderRadius: 10, maxWidth: 300 }}
 							selected={getFormatedDate(new Date(), 'jYYYY/jMM/jDD')}
 							onDateChange={this.pickUpDateChanged}
 						/>
@@ -171,7 +171,7 @@ export default class Home extends React.Component {
 								borderColor: 'rgba(122, 146, 165, 0.1)',
 							}}
 							mode="calendar"
-							style={{ borderRadius: 10 }}
+							style={{ borderRadius: 10, maxWidth: 300 }}
 							selected={getFormatedDate(new Date(), 'jYYYY/jMM/jDD')}
 							onDateChange={this.dropOffDateChanged}
 						/>
