@@ -1,5 +1,5 @@
 import React from "react"
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import MyHeader from '../ui/MyHeader';
 import MainTextInput from '../ui/MainTextInput';
 import AdBlock from "../ui/AdBlock";
@@ -30,14 +30,16 @@ export default class VehicleInfo extends React.Component {
                                 navigation={this.props.navigation}
                                 title="Vehicle Info"
                             />
+                            <Image style={styles.img}
+                                />
                         </View>
                     </View>
 
-                    <View style={styles.half_box}>
+                    {/* <View style={styles.half_box}>
                         <View style={styles.sign_box}>
                             <AdBlock />
                         </View>
-                    </View>
+                    </View> */}
 
                 </View>
 
@@ -90,7 +92,11 @@ const styles = StyleSheet.create({
         color: '#767676',
         marginTop: 24,
     },
-    text_btn: {
-
+    img: {
+        maxWidth: 350,
+        maxHeight: 221,
+        backgroundColor: "#F5F4F4",
+        width: '100%',
+        height: '100%',
     }
 });

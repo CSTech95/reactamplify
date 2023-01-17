@@ -191,7 +191,7 @@ export default class Home extends React.Component {
 									}
 									img={vehicle.img}
 									year={vehicle.year}
-									model={vehicle.model}
+									model={vehicle.make+ " "+vehicle.model}
 								/>
 							);
 						})}

@@ -31,6 +31,8 @@ export async function createRental() {
 export async function getRentals() {
 	const models = await DataStore.query(Vehicle);
 	console.log(models);
+
+	return models;
 }
 
 // Update Rental

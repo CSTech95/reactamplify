@@ -2,14 +2,13 @@ import React from "react";
 import { SafeAreaView, StyleSheet, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default class Vehicle extends React.Component {
+export default class VehicleItem extends React.Component {
 
     render() {
 
         return (
             <TouchableOpacity
             style={styles.card}
-                key={this.props.key}
                 onPress={this.props.onPress}
                 disabled={this.props.disabled}>
                 <Image style={styles.imgContainer} source={this.props.img} />
