@@ -50,12 +50,12 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2023-01-16T23:49:27.849Z",
+      "lastPushTimeStamp": "2023-01-18T12:15:34.161Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apicarservice"
       },
-      "lastPushDirHash": "vM13CxvR/HaxnTWkE/4PWDJGaZY="
+      "lastPushDirHash": "P7toU7oyrqmaldv1TiSz4AyjNZM="
     }
   },
   "auth": {
@@ -96,7 +96,7 @@
         "IdentityPoolName": "testAuthIdentityPool__staging",
         "UserPoolName": "carservice"
       },
-      "lastPushTimeStamp": "2023-01-16T23:49:27.853Z",
+      "lastPushTimeStamp": "2023-01-18T12:15:34.163Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/auth/carservice-cloudformation-template.json",
         "logicalId": "authcarservice"
@@ -120,7 +120,7 @@
       "output": {
         "carusersGroupRole": "arn:aws:iam::461122982034:role/us-east-1_akzBrz70y-carusersGroupRole"
       },
-      "lastPushTimeStamp": "2023-01-16T23:49:30.441Z",
+      "lastPushTimeStamp": "2023-01-18T12:15:35.655Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/auth/userPoolGroups-cloudformation-template.json",
         "logicalId": "authuserPoolGroups"
@@ -136,7 +136,7 @@
         "BucketName": "file-amplify155413-staging",
         "Region": "us-east-1"
       },
-      "lastPushTimeStamp": "2023-01-16T23:49:30.538Z",
+      "lastPushTimeStamp": "2023-01-18T12:15:35.724Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-carservice-staging-155413-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storages3fileamplify"
