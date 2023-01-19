@@ -31,6 +31,35 @@ export default class VehicleInfo extends React.Component {
         }
     }
 
+    showPickUp = () => {
+		this.setState({
+			show_pickup: true,
+			show_dropoff: false,
+		});
+		this.forceUpdate();
+	};
+
+	showDropOff = () => {
+		this.setState({
+			show_pickup: false,
+			show_dropoff: true,
+		});
+		this.forceUpdate();
+	};
+
+	pickUpDateChanged = (date) => {
+		this.setState({
+			show_pickup: false,
+			pickup_date: date,
+		});
+	};
+	dropOffDateChanged = (date) => {
+		this.setState({
+			show_dropoff: false,
+			dropoff_date: date,
+		});
+	};
+
 
     render() {
         const countries = ["Bridgeport", "Stratford", "Milford"];
