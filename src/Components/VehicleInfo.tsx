@@ -10,6 +10,7 @@ import SimpleButton from "../ui/SimpleButton";
 import { DataStore } from "@aws-amplify/datastore";
 import SelectDropdown from "react-native-select-dropdown";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
+import { Vehicle } from "../models";
 
 export default class VehicleInfo extends React.Component {
 
@@ -31,34 +32,54 @@ export default class VehicleInfo extends React.Component {
         }
     }
 
+    async rentVehicle() {
+        await DataStore.save(
+            new Vehicle({
+                make: this.state.make,
+                model: this.state.model,
+                year: this.state.year,
+                vehicleType: this.state.type,
+                img: this.state.img,
+                startTime: this.state.pickup_date,
+                endTime: this.state.dropoff_date
+            })
+        ).then(res => {
+            console.log("Rental has been added");
+            this.props.navigation.goBack(null);
+            this.props.navigation.navigate('MyRentals');
+        });
+        
+
+    }
+
     showPickUp = () => {
-		this.setState({
-			show_pickup: true,
-			show_dropoff: false,
-		});
-		this.forceUpdate();
-	};
+        this.setState({
+            show_pickup: true,
+            show_dropoff: false,
+        });
+        this.forceUpdate();
+    };
 
-	showDropOff = () => {
-		this.setState({
-			show_pickup: false,
-			show_dropoff: true,
-		});
-		this.forceUpdate();
-	};
+    showDropOff = () => {
+        this.setState({
+            show_pickup: false,
+            show_dropoff: true,
+        });
+        this.forceUpdate();
+    };
 
-	pickUpDateChanged = (date) => {
-		this.setState({
-			show_pickup: false,
-			pickup_date: date,
-		});
-	};
-	dropOffDateChanged = (date) => {
-		this.setState({
-			show_dropoff: false,
-			dropoff_date: date,
-		});
-	};
+    pickUpDateChanged = (date) => {
+        this.setState({
+            show_pickup: false,
+            pickup_date: date,
+        });
+    };
+    dropOffDateChanged = (date) => {
+        this.setState({
+            show_dropoff: false,
+            dropoff_date: date,
+        });
+    };
 
 
     render() {
@@ -178,7 +199,7 @@ export default class VehicleInfo extends React.Component {
                             )}
                             <View style={styles.half_box}>
                                 <View style={styles.sign_box}>
-                                    <MyButton style={styles.btn} title="RENT THIS VEHICLE" color="#06A500" titleColor="#ffffff" onPress={() => console.log("clicked")} />
+                                    <MyButton style={styles.btn} title="RENT THIS VEHICLE" color="#06A500" titleColor="#ffffff" onPress={() => this.rentVehicle()} />
                                 </View>
                             </View>
                         </View>

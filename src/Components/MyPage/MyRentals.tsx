@@ -53,21 +53,21 @@ export default class MyRentals extends React.Component {
 
                             <View>
 
-                                {this.state.rentals && this.state.rentals.map((rental) => {
-                                console.log(rental)
-                                return (
-                                    <RentalItem
-                                        onPress={() => { console.log(rental.id + "clicked") }}
-                                        img={rental.img}
-                                        year={rental.year}
-                                        model={rental.make + " " + rental.model}
-                                        start={rental.startTime}
-                                        end={rental.endTime}
-                                    />
-                                )
-                            })}
+                                {this.state.rentals && this.state.rentals.reverse().map((rental) => {
+                                    console.log(rental)
+                                    return (
+                                        <RentalItem
+                                            onPress={() => { console.log(rental.id + "clicked") }}
+                                            img={rental.img}
+                                            year={rental.year}
+                                            model={rental.make + " " + rental.model}
+                                            start={rental.startTime}
+                                            end={rental.endTime}
+                                        />
+                                    )
+                                })}
                             </View>
-                            
+
                         </View>
                     </View>
 
